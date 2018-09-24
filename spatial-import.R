@@ -27,6 +27,7 @@ claim_raw <- read_csv("/Users/sallyowen/Documents/Public_Insurance_and_Climate_C
 head(claim_raw)
 
 claim_geo <- merge(claim_raw, portfolio_raw, by="PortfolioID")
+
 coordinates(claim_geo) <- claim_geo[c("WGS84Longitude", "WGS84Latitude")]
 plot(claim_geo)
 
