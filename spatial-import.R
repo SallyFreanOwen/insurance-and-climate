@@ -35,6 +35,7 @@ setwd("~/EQC-climate-change-part-two")
 
 ### EQC data
 
+#loading packages required 
 library(sp) 
 library(tidyverse)
 
