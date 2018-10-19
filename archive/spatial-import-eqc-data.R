@@ -39,10 +39,11 @@ setwd("~/EQC-climate-change-part-two")
 
 #loading packages required 
 library(sp) 
+# library(sf) #sf is designed to supercede sp - it's more dataframebased with or w/o 
 library(tidyverse)
 
 portfolio_raw <- read_csv("/Users/sallyowen/Documents/Public_Insurance_and_Climate_Change_Project/Raw_Data/From_Work_Computer/EQC_Portfolio_2017_Motu.csv")
-head(portfolio_raw)
+head(portfolio_raw)3
 
 portfolio_geo <- filter(portfolio_raw, PortfolioID != ".") #only valid portfolio lines
 #portfolio_valid <- filter(portfolio_raw, $PortfolioID != is.na)

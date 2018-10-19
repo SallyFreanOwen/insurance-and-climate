@@ -6,6 +6,8 @@
 ## one script type - for reproducibility and to
 ## supply code upon publishing if necessary 
 
+setwd("~/EQC-climate-change-part-two")
+
 # This r script should: investigate visualisations  
 
 ####
