@@ -41,7 +41,7 @@ precip_table <- read.csv2("/Users/sallyowen/Documents/Public_Insurance_and_Clima
 #csv2 deals with european standards (commas/decimals swapped)
 
 # This has columns for lat & lon, then a column for each day, containing rainfall 
-# Note the "centroid" is not actually a centroid 
+# Note the "centroid" is not actually a centroid (just NIWA's coordinates for each grid)
 
 precipWorking <- as.data.frame(precip_table)
 
@@ -55,13 +55,25 @@ rm(precip_table)
 library(reshape2)
 
 precipWorking <- precipWorking[2:6213]
-precipWorkingSparse <- precipWorking[precipWorking$precip != 0]
 precipWorking <- melt(precipWorking, id=c("niwa_centroid_lon","niwa_centroid_lat"))
 names(precipWorking) <- c("longitude", "latitude", "day", "precip")
 #sapply(precipWorking, class)
 precipWorking$day <- gsub("precip", "", precipWorking$day)
 precipWorking$day <- as.Date(precipWorking$day, format = "%d%m%y")
 
+precipWorking1 <- precipWorking[2:1000]
+precipWorking1 <- melt(precipWorking1, id=c("niwa_centroid_lon","niwa_centroid_lat"))
+
+precipWorking2 <- precipWorking[c(2,3,1001:3000)]
+precipWorking2 <- melt(precipWorking2, id=c("niwa_centroid_lon","niwa_centroid_lat"))
+
+precipWorking3 <- precipWorking[c(2,3,3001:6213)]
+precipWorking3 <- melt(precipWorking3, id=c("niwa_centroid_lon","niwa_centroid_lat"))
+
+precipWorkingLong <- bind_rows(precipWorking1, precipWorking2, precipWorking3)
+names(precipWorkingLong) <- c("longitude", "latitude", "day", "precip")
+head(precipWorkingLong, 5)
+tail(precipWorkingLong, 5)
 
 #precipTest <- precipWorking[1:100,2:100]
 #precipTest2 <- melt(precipTest, id=c("niwa_centroid_lon","niwa_centroid_lat"))
