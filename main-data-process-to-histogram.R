@@ -10,7 +10,7 @@ source("EQC-3-portfolio-vis.R")
 # 4 - vis claim locations 
 source("EQC-4-claim-vis.R")
 # 5 - niwa rain netcdf to r data (including day as r dates)
-source("EQC-5-rain-import.R")
+source("EQC-5-rain-import.R") 
 # 6 - vis rain 
 source("EQC-6-rain-vis")
 # 7 - geo process portfolio adding closest rain point 
