@@ -10,15 +10,22 @@ library(dplyr)
 
 # Part one - points 
 precipOneDay <- filter(precipWorkingLong, date == "1999-01-01")
-
+precipOneDay <- st_as_sf(precipOneDay, coords = c("longitude", "latitude"), crs = 4326)
+plot(precipOneDay, main="NIWA grid points") 
 
 # Part Two - series 
-precipOneCell <- precipWorkingLong[filter(longitude = "", latitude = "")]
+precipOneCell <- filter(precipWorkingLong, longitude == first(precipWorkingLong$longitude, order_by = NULL, default = default_missing(x)) & latitude == first(precipWorkingLong$latitude, order_by = NULL, default = default_missing(x)))
+precipOneCell <- st_as_sf(precipOneCell, coords = c("longitude", "latitude"), crs = 4326)
+plot(precipOneCell$precip)
+
+require(ggplot2)
+theme_set(theme_bw()) # Change the theme to my preference
+ggplot(aes(x = date, y = precip), data = precipOneCell) + geom_point()
 
 # Part Three - whole dataset 
 
-par(mar=c(1,1,1,1)) # (making margins large enough) 
-plot(st_geometry(precipSP), main="NIWA grid points", pch = 1, cex = 0.1, col = 1, bg = 1, type = "p")
+#par(mar=c(1,1,1,1)) # (making margins large enough) 
+#plot(st_geometry(precipSP), main="NIWA grid points", pch = 1, cex = 0.1, col = 1, bg = 1, type = "p")
 
 
 
