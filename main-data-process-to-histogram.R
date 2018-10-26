@@ -14,8 +14,9 @@ source("EQC-5-rain-import.R")
 # 6 - vis rain 
 source("EQC-6-rain-vis")
 # 7 - geo process portfolio adding closest rain point 
-
+source("EQC-7-joining-grid-portfolio")
 # 8 - line segments portfolio to rain 
+
 # 9 - generate claim window 
 
 

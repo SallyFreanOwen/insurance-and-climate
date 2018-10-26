@@ -14,7 +14,7 @@ aMAP<-leaflet() %>% #width = "100%", height="100%"
              completedColor = "#7D4479") %>%
   
   # all CA gages
-  addCircleMarkers(data=portfolioSample, group="Portfolio sample",
+  addCircleMarkers(data=portfolioSP, group="Portfolio sample",
                    stroke=TRUE, weight=0.3, radius=4,
                    fillOpacity = 0.7,
                    fillColor = "orange") %>% 
@@ -46,3 +46,4 @@ aMAP<-leaflet() %>% #width = "100%", height="100%"
 
 aMAP
 
+# Map of precip (one day only) and portfolios  
