@@ -10,7 +10,7 @@ library(ncdf.tools)
 library(sf)
 
 # read in one of the original .nc files from niwa (note this is only one model, and just the historic, 1971-2005)
-raindata <- nc_open("/Users/sallyowen/Documents/Public_Insurance_and_Climate_Change_Project/Raw_Data/Precip/Mon_TotalPrecipCorr_VCSN_BCC-CSM1.1_1971-2005_RCPpast.nc")
+raindata <- nc_open("Data/Mon_TotalPrecipCorr_VCSN_BCC-CSM1.1_1971-2005_RCPpast.nc")
 
 # info on the data:
 print(raindata)
@@ -40,7 +40,7 @@ library(sf)
 ## I want to use - need to add this code in eventually. 
 
 # Inputing rain data as csv, transformed earlier (NB need to add that code to repository)
-precip_table <- read.csv2("/Users/sallyowen/Documents/Public_Insurance_and_Climate_Change_Project/Raw_Data/Precip/VCSN_Rain5k_1999-2016.csv", sep=";", stringsAsFactors = FALSE)
+precip_table <- read.csv2("Data/VCSN_Rain5k_1999-2016.csv", sep=";", stringsAsFactors = FALSE)
 #csv2 deals with european standards (commas/decimals swapped)
 
 # This has columns for lat & lon, then a column for each day, containing rainfall 

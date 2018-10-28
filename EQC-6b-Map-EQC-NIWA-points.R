@@ -1,5 +1,5 @@
 library(leaflet)
-library(map)
+#library("Map")
 
 aMAP<-leaflet() %>% #width = "100%", height="100%"
   addTiles() %>% 

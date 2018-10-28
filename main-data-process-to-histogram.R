@@ -12,9 +12,11 @@ source("EQC-4-claim-vis.R")
 # 5 - niwa rain netcdf to r data (including day as r dates)
 source("EQC-5-rain-import.R") 
 # 6 - vis rain 
-source("EQC-6-rain-vis")
+source("EQC-6-rain-vis.R")
+# 6b - optional (slight tangent) 
+source("EQC-6b-Map-EQC-NIWA-points.R")
 # 7 - geo process portfolio adding closest rain point 
-source("EQC-7-joining-grid-portfolio")
+source("EQC-7-joining-grid-portfolio.R")
 # 8 - line segments portfolio to rain 
 
 # 9 - generate claim window 
