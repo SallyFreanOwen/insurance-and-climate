@@ -46,4 +46,4 @@ inds_df <- tibble("niwann"=inds[,1],
                   "portfolionn_loc"=portfolioSP$geometry)
 head(inds_df)
 
-
+rm(inds)
