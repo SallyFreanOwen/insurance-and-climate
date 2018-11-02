@@ -1,6 +1,6 @@
 # EQC 5 - niwa data import 
 
-setwd("~/EQC-climate-change-part-two")
+# setwd("~/EQC-climate-change-part-two")
 
 #  install.packages("roperators")
 
@@ -33,8 +33,6 @@ fillvalue
 
 # now that we have the array of rain info saved, closing the .nc file 
 nc_close(raindata)
-
-library(sf)
 
 ## Note:  at this point I use a pre-extracted/shaped csv from the actual raindata model.. 
 ## I want to use - need to add this code in eventually. 
@@ -87,7 +85,9 @@ precipWorking2$day <- gsub("precip", "", precipWorking2$day)
 head(precipWorking2, 5)
 tail(precipWorking2, 5)
 
-precipWorking3 <- precipWorking[c(1,2,3001:6212)]
+memory.limit(size=50000)
+
+precipWorking3 <- precipWorking[c(1,2,3001:4500)]
 precipWorking3 <- melt(precipWorking3, id=c("niwa_centroid_lon","niwa_centroid_lat"))
 names(precipWorking3) <- c("longitude", "latitude", "day", "precip")
 precipWorking3$day <- gsub("precip", "", precipWorking3$day)
@@ -95,7 +95,15 @@ precipWorking3$day <- gsub("precip", "", precipWorking3$day)
 head(precipWorking3, 5)
 tail(precipWorking3, 5)
 
-precipWorkingLong <- bind_rows(precipWorking1, precipWorking2, precipWorking3)
+precipWorking4 <- precipWorking[c(1,2,4501:6212)]
+precipWorking4 <- melt(precipWorking4, id=c("niwa_centroid_lon","niwa_centroid_lat"))
+names(precipWorking4) <- c("longitude", "latitude", "day", "precip")
+precipWorking4$day <- gsub("precip", "", precipWorking4$day)
+#precipWorking3$day <- as.Date(precipWorking3$day, format = "%d%m%y")
+head(precipWorking4, 5)
+tail(precipWorking4, 5)
+
+precipWorkingLong <- bind_rows(precipWorking1, precipWorking2, precipWorking3, precipWorking4)
 head(precipWorkingLong, 5)
 tail(precipWorkingLong, 5)
 
