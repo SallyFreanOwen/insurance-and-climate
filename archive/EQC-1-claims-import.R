@@ -1,6 +1,9 @@
 
 # EQC claims import  
 
+# Clear workspace before beginning:
+rm(list=ls())
+
 setwd("~/EQC-climate-change-part-two")
 
 library(sf) 
@@ -9,7 +12,7 @@ library(sf)
 library(tidyverse)
 
 # import claim data
-claimRaw <- read.csv("/Users/sallyowen/Documents/Public_Insurance_and_Climate_Change_Project/Raw_Data/Motu_EQC_LSF_claims_post_2000.csv", stringsAsFactors = FALSE)
+claimRaw <- read.csv("Data/Motu_EQC_LSF_claims_post_2000.csv", stringsAsFactors = FALSE)
 # check variable "types"
 sapply(claimRaw, class)
 head(claimRaw$EventDate)

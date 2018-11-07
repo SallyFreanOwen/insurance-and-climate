@@ -9,7 +9,7 @@ library(sf)
 library(tidyverse)
 
 # Note data deliberately not saved in wd - confidential, only want code in cloud (not data itself)
-portfolioRaw <- read.csv("/Users/sallyowen/Documents/Public_Insurance_and_Climate_Change_Project/Raw_Data/From_Work_Computer/EQC_Portfolio_2017_Motu.csv", stringsAsFactors = FALSE)
+portfolioRaw <- read.csv("Data/EQC_Portfolio_2017_Motu.csv", stringsAsFactors = FALSE)
 
 # Check columns type - numeric 
 sapply(portfolioRaw, class)
