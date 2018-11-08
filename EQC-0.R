@@ -2,6 +2,7 @@
 
 suppressPackageStartupMessages({
 install.packages("tidyverse")
+install.packages("roperators")
 install.packages("sf")
 install.packages("ncdf4")
 install.packages("ncdf.tools")
