@@ -130,11 +130,12 @@ openandsave <- function(ncname) {
   rain_df02 <- na.omit(data.frame(cbind(lonlat,rain_mat)))
   names(rain_df02) <- c("lon","lat") # could rename variables to be rain on days 1-365 
   names(rain_df02)[3:ncol(rain_df02)]<- t(time_values_df)
-  head(na.omit(rain_df02, 10))
+  #head(na.omit(rain_df02, 10))
   
   #At this point we could add a variable containing summary statistics to each grid if we wanted 
   
   # Sense check - what size is this matrix? Should be 365 days of observations of rain + lat long variables 
+  # Worked!
   
   # write out the dataframe as a .csv file
   csvfile <- paste(ncname, ".csv", sep="")
@@ -156,43 +157,66 @@ openandsave <- function(ncname) {
   # http://geog.uoregon.edu/bartlein/courses/geog490/week04-netCDF.html 
 }
 
-
-
 # set path and filename
-ncname <- "VCSN_Rain5k_1999" 
+ncname <- "Data/VCSN_Rain5k_1999" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2000" 
+ncname <- "Data/VCSN_Rain5k_2000" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2001" 
+ncname <- "Data/VCSN_Rain5k_2001" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2002" 
+ncname <- "Data/VCSN_Rain5k_2002" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2003" 
+ncname <- "Data/VCSN_Rain5k_2003" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2004" 
+ncname <- "Data/VCSN_Rain5k_2004" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2005" 
+ncname <- "Data/VCSN_Rain5k_2005" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2006" 
+ncname <- "Data/VCSN_Rain5k_2006" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2007" 
+ncname <- "Data/VCSN_Rain5k_2007" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2008" 
+ncname <- "Data/VCSN_Rain5k_2008" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2009" 
+ncname <- "Data/VCSN_Rain5k_2009" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2010" 
+ncname <- "Data/VCSN_Rain5k_2010" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2011" 
+ncname <- "Data/VCSN_Rain5k_2011" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2012" 
+ncname <- "Data/VCSN_Rain5k_2012" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2013" 
+ncname <- "Data/VCSN_Rain5k_2013" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2014"
+ncname <- "Data/VCSN_Rain5k_2014"
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2015" 
+ncname <- "Data/VCSN_Rain5k_2015" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2016" 
+ncname <- "Data/VCSN_Rain5k_2016" 
 openandsave(ncname)
 
+######
+
+# Now adding them all together: 
+
+# read in new data as R objects:
+VCSN_Rain5k_1999 <- read.csv2("Data/VCSN_Rain5k_1999.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2000 <- read.csv2("Data/VCSN_Rain5k_2000.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2001 <- read.csv2("Data/VCSN_Rain5k_2001.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2002 <- read.csv2("Data/VCSN_Rain5k_2002.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2003 <- read.csv2("Data/VCSN_Rain5k_2003.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2004 <- read.csv2("Data/VCSN_Rain5k_2004.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2005 <- read.csv2("Data/VCSN_Rain5k_2005.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2006 <- read.csv2("Data/VCSN_Rain5k_2006.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2007 <- read.csv2("Data/VCSN_Rain5k_2007.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2008 <- read.csv2("Data/VCSN_Rain5k_2008.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2009 <- read.csv2("Data/VCSN_Rain5k_2009.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2010 <- read.csv2("Data/VCSN_Rain5k_2010.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2011 <- read.csv2("Data/VCSN_Rain5k_2011.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2012 <- read.csv2("Data/VCSN_Rain5k_2012.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2013 <- read.csv2("Data/VCSN_Rain5k_2013.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2014 <- read.csv2("Data/VCSN_Rain5k_2014.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2015 <- read.csv2("Data/VCSN_Rain5k_2015.csv", sep=";", stringsAsFactors = FALSE)
+VCSN_Rain5k_2016 <- read.csv2("Data/VCSN_Rain5k_2016.csv", sep=";", stringsAsFactors = FALSE)
+
+#VCSN_Rain5k_working <- 

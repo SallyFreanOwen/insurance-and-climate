@@ -3,39 +3,7 @@
 # setwd("~/EQC-climate-change-part-two")
 
 # load the ncdf4 package
-library(ncdf4)
-library(ncdf.tools)
 library(sf)
-
-# read in one of the original .nc files from niwa 
-raindata <- nc_open("Data/Mon_TotalPrecipCorr_VCSN_BCC-CSM1.1_1971-2005_RCPpast.nc")
-#(note this is only one model, and just the simulated, 1971-2005)
-#raindata <- nc_open("Data/Mon_TotalPrecipCorr_VCSN_BCC-CSM1.1_1971-2005_RCPpast.nc")
-
-# info on the data:
-print(raindata)
-# print(paste("The file has",raindata$nvars,"variables"))
-
-# naming the "rain" variable, which has three dimensions (lat lon t)
-rain <- raindata$var[[3]] 
-# and naming each dimension: 
-#lon <- ncvar_get(raindata, "longitude")
-#lat <- ncvar_get(raindata, "latitude")
-#t <- ncvar_get(raindata, "time")
-
-# coordinates from niwa grids are simply:
-#niwa_coordinates <- expand.grid(lon, lat)
-#plot(st_geometry(niwa_grid), main = "Niwa cell points", pch = 1, cex = 0.1, col = 1, bg = 1, type = "p")
-
-# checking what the convention is for missing variables, known as "fill values"
-fillvalue <- ncatt_get(raindata, "rain", "_FillValue")
-fillvalue
-
-# now that we have the array of rain info saved, closing the .nc file 
-nc_close(raindata)
-
-## Note:  at this point I use a pre-extracted/shaped csv from the actual rain observations 
-## I want to use - need to add this code in eventually. 
 
 # Inputing rain data as csv, transformed earlier (NB need to add that code to repository)
 precip_table <- read.csv2("Data/VCSN_Rain5k_1999-2016.csv", sep=";", stringsAsFactors = FALSE)
