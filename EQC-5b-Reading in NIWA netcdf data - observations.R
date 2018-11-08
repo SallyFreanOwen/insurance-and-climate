@@ -9,14 +9,7 @@ openandsave <- function(ncname) {
   ######
   #Reading in the data 
   
-  #install.packages("ncdf4")
   library(ncdf4)
-  # Setting working directory 
-  # setwd("R:/Agriculture/Deep_South_Challenge_2017/5 Raw Data/NIWA Climate observations")
-  # If this isn't working (sometimes it doesn't - manually choose Session then Set working directory)
-  
-  
-  
   
   ncfname <- paste(ncname, ".nc", sep="")
   dname <- "precipitation_amount"  # note: rain means precipitation amount in kg m-2 - full description: "virtual climate station rainfall in mm/day from 9am to 9 am recorded against day of start of period 
@@ -66,9 +59,6 @@ openandsave <- function(ncname) {
   #Check you got them all (print current workspace):
   ls()
   
-  
-  #Reshaping the data (with a bit of cleaning along the way) 
-  # this piece first saving only one day against lat longs for each grid
   ###### 
   #Reshaping the data (with a bit of cleaning along the way) 
   # this piece first saving only one day against lat longs for each grid

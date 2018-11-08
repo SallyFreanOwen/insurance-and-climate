@@ -2,15 +2,15 @@
 
 # setwd("~/EQC-climate-change-part-two")
 
-#  install.packages("roperators")
-
 # load the ncdf4 package
 library(ncdf4)
 library(ncdf.tools)
 library(sf)
 
-# read in one of the original .nc files from niwa (note this is only one model, and just the historic, 1971-2005)
+# read in one of the original .nc files from niwa 
 raindata <- nc_open("Data/Mon_TotalPrecipCorr_VCSN_BCC-CSM1.1_1971-2005_RCPpast.nc")
+#(note this is only one model, and just the simulated, 1971-2005)
+#raindata <- nc_open("Data/Mon_TotalPrecipCorr_VCSN_BCC-CSM1.1_1971-2005_RCPpast.nc")
 
 # info on the data:
 print(raindata)
@@ -34,7 +34,7 @@ fillvalue
 # now that we have the array of rain info saved, closing the .nc file 
 nc_close(raindata)
 
-## Note:  at this point I use a pre-extracted/shaped csv from the actual raindata model.. 
+## Note:  at this point I use a pre-extracted/shaped csv from the actual rain observations 
 ## I want to use - need to add this code in eventually. 
 
 # Inputing rain data as csv, transformed earlier (NB need to add that code to repository)

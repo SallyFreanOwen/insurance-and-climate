@@ -2,7 +2,9 @@
 # December 2017 
 # Sally Owen 
 
-#Reading in the data/saving as useful csvs - a function that takes a filenames, and spits out the csvs we want (a tableof grid lat then long then all the observations associated with each ... 
+#Reading in the data/saving as useful csvs - a function that takes a filename, 
+# and spits out the csvs we want (a table of grid lat then long then all the observations 
+# associated with each "grid" 
 
 openandsave <- function(ncname) {
   
