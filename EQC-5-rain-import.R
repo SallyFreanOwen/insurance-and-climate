@@ -5,9 +5,10 @@
 # load the ncdf4 package
 library(sf)
 
-# Inputing rain data as csv, transformed earlier (NB need to add that code to repository)
-precip_table <- read.csv2("Data/VCSN_Rain5k_1999-2016.csv", sep=";", stringsAsFactors = FALSE)
-#csv2 deals with european standards (commas/decimals swapped)
+# Inputing rain data as csv (output from EQC-5a)
+precip_table <- read.csv("Data/VCSN_Rain5k_1999_2016.csv", sep=",", stringsAsFactors = FALSE)
+names(precip_table) <- gsub("X", "precip", names(precip_table))
+#names(precip_table) <- gsub(".", "", names(precip_table))
 
 # This has columns for lat & lon, then a column for each day, containing rainfall 
 # Note the "centroid" is not actually a centroid (just NIWA's coordinates for each grid)
