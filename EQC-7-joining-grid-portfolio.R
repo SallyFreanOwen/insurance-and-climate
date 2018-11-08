@@ -1,9 +1,5 @@
 # EQC 7 - joining nearest neighbours rain to portfolio 
 
-# install.packages("nearest")
-# st_nearest_points(x, y, ...)
-
-
 suppressMessages({
   library(tidyverse);
   library(sf);
