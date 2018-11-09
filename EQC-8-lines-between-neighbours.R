@@ -16,8 +16,6 @@ pairs <- cbind.data.frame(inds_df$niwann_loc, inds_df$portfolionn_loc, inds_df$p
 names(pairs) <- c("point.1", "point.2", "pairID")
 #pairsample <- pairs[sample(nrow(pairs), 1000, replace=FALSE),]
 
-
-
 # Reshape wide to long (manually as reshape not happy with the geometries)
 #pairs1 <- cbind.data.frame(pairs$point.1, pairs$pairID)
 #names(pairs1) <- c("point", "pairID")
@@ -25,13 +23,12 @@ names(pairs) <- c("point.1", "point.2", "pairID")
 #names(pairs2) <- c("point", "pairID")
 #pairsLong <- rbind.data.frame(pairs1, pairs2)
 
-
 #pairsST <- st_combine(c(pairs$point.1, pairs$point.2))
 
 # Number of total linestrings to be created
-n <- 1613035
+n <- 5000
 
-# Build linestrings
+# Build info for linestrings
 linestrings <- lapply(X = 1:n, FUN = function(x) {
   
   pair <- st_combine(c(pairs$point.1[x], pairs$point.2[x + 1]))
@@ -40,10 +37,7 @@ linestrings <- lapply(X = 1:n, FUN = function(x) {
   
 })
 
-# Create linestrings 
-pairsLong <- st_cast(pairsLong, "LINESTRING")
-
-# Test plot 
-plot(pairsLong[, 1:2])
-#inds_lines <- st_cast(inds_df, "LINESTRING") # not working yet 
+# Geo-process linestrings 
+multilinestring <- st_multilinestring(do.call("rbind", linestrings))
+plot(multilinestring)
 
