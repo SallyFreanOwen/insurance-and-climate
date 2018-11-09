@@ -33,7 +33,7 @@ source("EQC-7-joining-grid-portfolio.R")
 source("EQC-8-lines-between-neighbours.R")
 
 # 9 - generate claim window 
-
+source("EQC-gen-claim-window.R")
 
 
 
