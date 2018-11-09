@@ -41,3 +41,6 @@ linestrings <- lapply(X = 1:n, FUN = function(x) {
 multilinestring <- st_multilinestring(do.call("rbind", linestrings))
 plot(multilinestring)
 
+# NB: modified using this ref:
+# https://gis.stackexchange.com/questions/270725/r-sf-package-points-to-multiple-lines-with-st-cast/270894#270894 
+
