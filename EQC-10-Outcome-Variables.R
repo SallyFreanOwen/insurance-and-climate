@@ -3,6 +3,8 @@
 ## Download New Zealand monthly nightlight data, for entire monthly time-series (began April 2012) 
 
 install.packages("Rnightlights")
+install.packages("aria2")
+install.packages("GDAL")
 
 library(Rnightlights)
 library(reshape2)
@@ -22,6 +24,16 @@ highestAdmLevelStats <- getCtryNlData(ctryCode = ctry,
                                       nlPeriods = nlRange("201204", "201810"), 
                                       nlStats = list("sum",na.rm=TRUE),
                                       ignoreMissing=FALSE)
+
+Rnightlights:::dnldCtryPoly(ctryCode="NZL")
+initCtryNlData <- Rnightlights:::createCtryNlDataDF("NZL")
+Rnightlights:::downloadNlTiles(nlType="VIIRS.M", 
+                               nlPeriod="201401", 
+                               tileList=Rnightlights:::getCtryTileList(ctryCodes="NZL", 
+                                                                       nlType="VIIRS.M")
+)
+
+Rnightlights:::existsCtryNlData("NZL", "KEN_adm0", "VIIRS.M","201401", "sum")
 
 ## Visualise nightlight extract 
 
@@ -64,4 +76,9 @@ print(g)
 #quick conversion to interactive map with plotly
 ggplotly(g)
 
-# Adapted from https://github.com/chrisvwn/Rnightlights
+# Above adapted from https://github.com/chrisvwn/Rnightlights
+
+# Another possibility to explore: https://github.com/walshc/nightlights
+
+ # if (!require(devtools)) install.packages("devtools")
+#devtools::install_github("walshc/nightlights") 

@@ -5,9 +5,12 @@ suppressMessages({
   library(sf);
   library(rvest);
   library(SearchTrees);
-  library(Imap);
-  library(leaflet);
-  library(htmltools);
+  library(Imap)
+})
+
+suppressPackageStartupMessages({
+  library(leaflet)
+  library(htmltools)
   library(SearchTrees)
 })
 
@@ -21,8 +24,6 @@ suppressMessages({
 ## Find indices of the two nearest points in A to each of the points in B
 tree <- createTree(st_coordinates(precipOneDay))
 inds <- knnLookup(tree, newdat=st_coordinates(portfolioSP), k=1) # can be 2 or more
-# an experiment - trying to figure out the pairing issues:
-#inds <- knnLookup(tree, newdat=st_coordinates(claimSP), k=1) # can be 2 or more
 
 ## Show that it worked
 plot(st_coordinates(precipOneDay), pch=1, cex=0.8)
@@ -41,6 +42,5 @@ inds_df <- tibble("niwann"=inds[,1],
                   "portfolionn_ID"=portfolioSP$PortfolioID,
                   "portfolionn_loc"=portfolioSP$geometry)
 head(inds_df)
-tail(inds_df)
 
 rm(inds)
