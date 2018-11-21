@@ -27,7 +27,7 @@ precipWorking <- melt(precipWorking, id=c("lon","lat"))
 names(precipWorking) <- c("longitude", "latitude", "day", "rain")
 sapply(precipWorking, class)
 precipWorking$day <- gsub("precip", "", precipWorking$day)
-precipWorking$day <- as.Date(precipWorking$day, format = "%d.%m.%y")
+precipWorking$day <- as.Date(precipWorking$day, format = "%d.%m.%Y")
 
 # If above method didn't work, could try below ... (subsetting - old code may need some tweaking)
 
