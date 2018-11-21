@@ -13,8 +13,19 @@
 # Output goal: dataframe below
 # | claim ID | grid lat | grid lon | Lossdate | Precip t-10 through t+10 | 
 
-named_pairs <- cbind.data.frame(inds_df$niwa_nn, inds_df$niwann_loc, inds_df$portfolionn_loc, inds_df$pairID, inds_df$portfolionn_ID)
+named_pairs <- cbind.data.frame(inds_df$niwann, inds_df$niwann_loc, inds_df$portfolionn_loc, inds_df$pairID, inds_df$portfolionn_ID)
 names(named_pairs) <- c("niwa_grid", "niwa_loc", "pairID", "PortfolioID")
 
-claimWorking <- merge(claimWorking, named_pairs, by = "PortfolioID") 
+claimWorking <- merge(claimWorking, named_pairs, by = "PortfolioID")
+
+# Building a histogram for one claim 
+
+claimExample <- claimWorking[1,]
+
+d = claimSample$LossDate 
+g = claimSample$niwa_grid
+
+tryingsomethingout <- precipWorking[day=='d' & grid=='g']
+
+
 
