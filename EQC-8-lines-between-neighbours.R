@@ -28,7 +28,8 @@ names(pairs) <- c("point.1", "point.2", "pairID")
 #memory.limit(size=50000)
 
 # Number of total linestrings to be created
-n <- 1613035
+#n <- 1613035
+n <- 100000
 
 # Build info for linestrings
 linestrings <- lapply(X = 1:n, FUN = function(x) {
