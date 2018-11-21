@@ -22,10 +22,15 @@ claimWorking <- merge(claimWorking, named_pairs, by = "PortfolioID")
 
 claimExample <- claimWorking[1,]
 
-d = claimSample$LossDate 
-g = claimSample$niwa_grid
 
-tryingsomethingout <- precipWorking[day=='d' & grid=='g']
+g = claimExample$niwa_grid
 
+tryingsomethingout <- filter(precipWorking, precipWorking$day == claimExample$LossDate)
+
+test <- subset(precipWorking, day > "2007-12-19" & day < "2007-12-21")
+# Noticed issue here - working in theory - but precip day stops :/ 
+
+precipWorking %>%
+  group_by()
 
 
