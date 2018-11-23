@@ -12,7 +12,7 @@ library(sf)
 library(tidyverse)
 
 # import claim data
-claimRaw <- read.csv("Data/Motu_EQC_LSF_claims_post_2000.csv", stringsAsFactors = FALSE)
+claimRaw <- read.csv("Data/Motu_EQC_claims_post_2000.csv", stringsAsFactors = FALSE)
 # check variable "types"
 sapply(claimRaw, class)
 head(claimRaw$EventDate)
