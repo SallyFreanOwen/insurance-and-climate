@@ -24,74 +24,11 @@ library(reshape2)
 
 ## If you're on an old machine, may be a problem with below - slow 
 precipWorking <- melt(precipWorking, id=c("lon","lat"))
+head(precipWorking)
 names(precipWorking) <- c("longitude", "latitude", "day", "rain")
+head(precipWorking)
 sapply(precipWorking, class)
 precipWorking$day <- gsub("precip", "", precipWorking$day)
-precipWorking$day <- as.Date(precipWorking$day, format = "%d.%m.%Y")
-
-# If above method didn't work, could try below ... (subsetting - old code may need some tweaking)
-
-## Trying with a test subset - worked well.
-#precipTest <- precipWorking[1:100,2:100]
-#precipTest2 <- melt(precipTest, id=c("niwa_centroid_lon","niwa_centroid_lat"))
-#names(precipTest2) <- c("longitude", "latitude", "day", "precip")
-#sapply(precipTest2, class)
-#precipTest2$day <- gsub("precip", "", precipTest2$day)
-#precipTest2$day <- as.Date(precipTest2$day, format = "%d%m%y")
-
-## Breaking up into parts to re-try 
-#precipWorking1 <- precipWorking[1:1000]
-#precipWorking1 <- melt(precipWorking1, id=c("niwa_centroid_lon","niwa_centroid_lat"))
-#names(precipWorking1) <- c("longitude", "latitude", "day", "precip")
-#something going on with the date formatting - losing to (N/A) when as.Date() on Working1 
-#precipWorking1$day <- gsub("precip", "", precipWorking1$day)
-#precipWorking1$day <- as.Date(precipWorking1$day, format = "%d%m%y")
-#head(precipWorking1)
-#tail(precipWorking1)
-#
-#precipWorking2 <- precipWorking[c(1,2,1001:3000)]
-#precipWorking2 <- melt(precipWorking2, id=c("niwa_centroid_lon","niwa_centroid_lat"))
-#names(precipWorking2) <- c("longitude", "latitude", "day", "precip")
-#precipWorking2$day <- gsub("precip", "", precipWorking2$day)
-##precipWorking2$day <- as.Date(precipWorking2$day, format = "%d%m%y")
-#head(precipWorking2, 5)
-#tail(precipWorking2, 5)
-#
-#memory.limit(size=50000)
-#
-#precipWorking3 <- precipWorking[c(1,2,3001:4500)]
-#precipWorking3 <- melt(precipWorking3, id=c("niwa_centroid_lon","niwa_centroid_lat"))
-#names(precipWorking3) <- c("longitude", "latitude", "day", "precip")
-#precipWorking3$day <- gsub("precip", "", precipWorking3$day)
-##precipWorking3$day <- as.Date(precipWorking3$day, format = "%d%m%y")
-#head(precipWorking3, 5)
-#tail(precipWorking3, 5)
-#
-#precipWorking4 <- precipWorking[c(1,2,4501:6212)]
-#precipWorking4 <- melt(precipWorking4, id=c("niwa_centroid_lon","niwa_centroid_lat"))
-#names(precipWorking4) <- c("longitude", "latitude", "day", "precip")
-#precipWorking4$day <- gsub("precip", "", precipWorking4$day)
-##precipWorking3$day <- as.Date(precipWorking3$day, format = "%d%m%y")
-#head(precipWorking4, 5)
-#tail(precipWorking4, 5)
-#
-#precipWorkingLong <- bind_rows(precipWorking1, precipWorking2, precipWorking3, precipWorking4)
-#head(precipWorkingLong, 5)
-#tail(precipWorkingLong, 5)
-
-#precipWorkingLong$day <- gsub("precip", "", precipWorkingLong$day)
-#precipWorkingLong$day <- as.Date(precipWorkingLong$day, format = "%d%m%y")
-
-#rm(precipWorking1)
-#rm(precipWorking2)
-#rm(precipWorking3)
-
-# check variable "types"
-#sapply(precipWorkingLong, class)
-
-# sorting out the date format 
-#precipWorkingLong$date <- as.Date(precipWorkingLong$day, format = "%m%d%y")
-
-#precipLongSample <- precipWorkingLong[sample(nrow(precipWorkingLong), 50, replace=FALSE), ]
-
-
+head(precipWorking)
+precipWorking$day <- as.Date(precipWorking$day, format = "%Y.%m.%d")
+sapply(precipWorking,class)
