@@ -66,18 +66,13 @@ openandsave <- function(ncname) {
   # this piece first saving only one day against lat longs for each grid
   
   # load some necessary packages 
-  library(chron)
   library(lattice)
   library(RColorBrewer)
   library(raster)
   
   # Convert time -- split the time units string into fields
   tustr <- strsplit(tunits$value, " ")
-  tdstr <- strsplit(unlist(tustr)[3], "-")
-  tmonth <- as.integer(unlist(tdstr)[2])
-  tday <- as.integer(unlist(tdstr)[3])
-  tyear <- as.integer(unlist(tdstr)[1])
-  time_values <- chron(time,origin=c(tmonth, tday, tyear))
+  time_values <- as.Date(time,origin=as.Date(unlist(tustr)[3]))
   time_values_c <- as.character(time_values)
   time_values_df<-as.data.frame(time_values_c)
   
