@@ -16,7 +16,7 @@ plot(precipOneDay, main="NIWA grid points")
 # Part Two - series 
 precipOneCell <- filter(precipWorking, longitude == first(precipWorking$longitude, order_by = NULL, default = default_missing(x)) & latitude == first(precipWorking$latitude, order_by = NULL, default = default_missing(x)))
 precipOneCell <- st_as_sf(precipOneCell, coords = c("longitude", "latitude"), crs = 4326)
-#plot(precipOneCell$rain)
+plot(precipOneCell$rain)
 require(ggplot2)
 theme_set(theme_bw()) # Change the theme to my preference
 ggplot(aes(x = day, y = rain), data = precipOneCell) + geom_point()
