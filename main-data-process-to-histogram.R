@@ -20,8 +20,8 @@ source("EQC-4-claim-vis.R")
 # NB would be nice to overlay onto the all portfolios map 
 
 # 5 - niwa rain netcdf to r data (including day as r dates)
-source("EQC-5a-NIWA-rain-import.R") # necessary if working from raw rain-data netcdf files, otherwise progress to 5b
-source("EQC-5-rain-import.R") 
+source("EQC-5-1-NIWA-rain-import.R") # necessary if working from raw rain-data netcdf files, otherwise progress to 5b
+source("EQC-5-2-rain-import.R") 
 
 # 6 - vis rain 
 source("EQC-6-rain-vis.R")
