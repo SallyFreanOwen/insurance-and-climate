@@ -14,31 +14,23 @@ aMAP<-leaflet() %>% #width = "100%", height="100%"
              completedColor = "#7D4479") %>%
   
   # all CA gages
-  addCircleMarkers(data=portfolioSP, group="Portfolio sample",
-                   stroke=TRUE, weight=0.3, radius=4,
+  addCircleMarkers(data=claimSP, group="Portfolios - claimed sample",
+                   stroke=TRUE, weight=0.3, radius=2,
                    fillOpacity = 0.7,
-                   fillColor = "orange") %>% 
-                   #popup=paste0("USGS Site: ", gages_ca$STANAME, 
-                    #            "<br>","SiteNo: ", gages_ca$STAID,
-                     #           "<br>", "Ecoregion: ", gages_ca$AGGECOREGI,
-                      #          "<br>", "Drainage Area (sqkm): ", gages_ca$DRAIN_SQKM)) 
-  #clusterOptions = markerClusterOptions(),
-  #clusterId = "gagesCluster") %>%
+                   fillColor = "orange") %>%
   
   # add samples
   addCircleMarkers(data=precipOneDay, group="Rain on first day",
                    opacity = 0.8, 
-                   #popup=paste0("CDEC Site: ", df_locs$ID, "<br>",
-                    #            "Station Name: ", df_locs$station, "<br>",
-                     #           "Elev_ft: ", df_locs$elev_ft, "<br>",
-                      #          "Operator: ",df_locs$Operator),
-                   weight=0.6,radius=1, stroke=TRUE,
+                   weight=0.6,
+                   radius=1, 
+                   stroke=TRUE,
                    fillColor = "blue") %>%
-  #hideGroup("GW Localities") %>% 
   
+  # add layer control
   addLayersControl(
     baseGroups = c("Topo","ESRI Aerial"),
-    overlayGroups = c("Rain on first day", "Portfolio sample"),
+    overlayGroups = c("Rain on first day", "Portfolios - claimed sample"),
     options = layersControlOptions(collapsed = T)) %>% 
   
   addLegend(position = "bottomright", labels=c("precip", "properties"),
@@ -46,4 +38,4 @@ aMAP<-leaflet() %>% #width = "100%", height="100%"
 
 aMAP
 
-# Map of precip (one day only) and portfolios  
+# Map of grids (one day only) and claimed portfolios  
