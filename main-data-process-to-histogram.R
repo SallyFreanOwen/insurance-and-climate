@@ -28,8 +28,8 @@ source("EQC-6-rain-vis.R")
 ## source("EQC-6b-Map-EQC-NIWA-points.R") # Mapped instead of plotted - NB Step 6b makes R crash on my work computer 
 
 # 7 - geo process portfolio adding closest rain point 
-install.packages("Imap")
-install.packages("SearchTrees")
+#install.packages("Imap")
+#install.packages("SearchTrees")
 source("EQC-7-joining-grid-portfolio.R")
 # plotting line segments portfolio to grid 
 ## source("EQC-7b-lines-between-neighbours.R")

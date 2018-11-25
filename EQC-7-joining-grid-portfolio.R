@@ -25,40 +25,29 @@ inds <- knnLookup(tree, newdat=st_coordinates(portfolioSP), k=1) # can be 2 or m
 #inds <- knnLookup(tree, newdat=st_coordinates(claimSP), k=1) # can be 2 or more
 
 ## Show that it worked
-plot(st_coordinates(precipOneDay), pch=1, cex=0.8)
-points(st_coordinates(portfolioSP), 
-     #bg=c("orange","maroon","purple","yellow", "green"), 
-     pch=22, col="forestgreen", cex=1.5)
-
+#plot(st_coordinates(precipOneDay), pch=1, cex=0.8)
+#points(st_coordinates(portfolioSP), 
+#     #bg=c("orange","maroon","purple","yellow", "green"), 
+#     pch=22, col="forestgreen", cex=1.5)
 
 ## Plot nearest neighbour
 #points(st_coordinates(precipOneDaySample)[4], pch=21, bg="orange", cex=3)
 #points(st_coordinates(portfolioSP)[inds[4,],], pch=16, bg="orange", cex=3)
 
-# Create a dataframe of the index 
-inds_df <- tibble("niwann"=inds[,1], 
-                  "niwann_loc"=precipOneDay$geometry[inds[,1]],
-                  "portfolionn_ID"=portfolioSP$PortfolioID,
-                  "portfolionn_loc"=portfolioSP$geometry)
-head(inds_df)
-tail(inds_df)
+# Create a tibble of the index 
+portfolioNearestGrid <- tibble("niwa_latlon"=precipOneDay$geometry[inds[,1]],
+                  "PortfolioID"=portfolioSP$PortfolioID,
+                  "portfolio_latlon"=portfolioSP$geometry)
 
-rm(inds)
+head(portfolioNearestGrid)
+tail(portfolioNearestGrid)
 
-# create dataframe of "pairs" info 
+# format as dataframe 
 
 library(devtools)
 library(sf)
 
 # Re-format neighbour link dataset from tibble to dataframe 
-inds_df <- as.data.frame((inds_df))
+portfolioNearestGrid <- as.data.frame((portfolioNearestGrid))
 
-# Add ID for each link 
-inds_df$pairID <- 1:nrow(inds_df)
-
-# Define group ID  
-inds_df <- group_by(inds_df, inds_df$pairID) 
-# Keep only point info and link ID 
-pairs <- cbind.data.frame(inds_df$niwann_loc, inds_df$portfolionn_loc, inds_df$pairID)
-names(pairs) <- c("point.1", "point.2", "pairID")
-
+#rm(inds)
