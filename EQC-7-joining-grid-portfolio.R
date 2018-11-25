@@ -44,3 +44,21 @@ head(inds_df)
 tail(inds_df)
 
 rm(inds)
+
+# create dataframe of "pairs" info 
+
+library(devtools)
+library(sf)
+
+# Re-format neighbour link dataset from tibble to dataframe 
+inds_df <- as.data.frame((inds_df))
+
+# Add ID for each link 
+inds_df$pairID <- 1:nrow(inds_df)
+
+# Define group ID  
+inds_df <- group_by(inds_df, inds_df$pairID) 
+# Keep only point info and link ID 
+pairs <- cbind.data.frame(inds_df$niwann_loc, inds_df$portfolionn_loc, inds_df$pairID)
+names(pairs) <- c("point.1", "point.2", "pairID")
+
