@@ -7,6 +7,7 @@
 
 # suppressing extra data?
 
+
 claimPortfolioGrid <- merge(claimWorking, portfolioNearestGrid, by = "PortfolioID")
 
 # Adding geometry column to rain
