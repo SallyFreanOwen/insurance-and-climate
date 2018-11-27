@@ -5,4 +5,4 @@ claimPortfolioSpatial$vcsnLatitude <- st_coordinates(claimPortfolioSpatial$vcsnP
 claimPortfolioSpatial$vcsnLongitude <- st_coordinates(claimPortfolioSpatial$vcsnPoint)[,2]
 #note rounded to 3dp
 
-claimPortfolioSpatialVCSN <- merge(claimPortfolioSpatial, vcsnWide, by = c("vcsnLatitude", "vcsnLongitude"))
+claimPortfolioSpatialVCSN <- merge(claimPortfolioSpatial, vcsn, by = c("vcsnLatitude", "vcsnLongitude"))
