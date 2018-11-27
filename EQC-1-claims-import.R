@@ -17,19 +17,48 @@ claimRaw <- read.csv("Data/Motu_EQC_claims_post_2000.csv", stringsAsFactors = FA
 sapply(claimRaw, class)
 head(claimRaw$EventDate)
 
-claimWorking <- claimRaw
+claims <- claimRaw
 
-sapply(claimWorking, class)
+#Updating names to standard lowerUpper format 
+first.letter  <- tolower(substring(names(claims),1, 1))
+other.letters <- substring(names(claims), 2)
+newnames      <- paste(first.letter, other.letters, sep="")
+names(claims) <- newnames
 
 #Sorting out dates
-claimWorking$EventDate <- as.Date(claimRaw$EventDate, format = "%Y-%m-%d")
-claimWorking$LossDate <- as.Date(claimRaw$LossDate, format = "%Y-%m-%d")
-claimWorking$ClaimOpenDate <- as.Date(claimRaw$ClaimOpenDate, format = "%Y-%m-%d")
+sapply(claims, class)
+claims$eventDate <- as.Date(claimRaw$EventDate, format = "%Y-%m-%d")
+claims$lossDate <- as.Date(claimRaw$LossDate, format = "%Y-%m-%d")
+claims$claimOpenDate <- as.Date(claimRaw$ClaimOpenDate, format = "%Y-%m-%d")
+claims$buildingClaimOpenDate <- as.Date(claimRaw$BuildingClaimOpenDate, format = "%Y-%m-%d")
+claims$landClaimOpenDate <- as.Date(claimRaw$LandClaimOpenDate, format = "%Y-%m-%d")
+claims$contentsClaimOpenDate <- as.Date(claimRaw$ContentsClaimOpenDate, format = "%Y-%m-%d")
+claims$buildingClaimCloseDate <- as.Date(claimRaw$BuildingClaimCloseDate, format = "%Y-%m-%d")
+claims$landClaimCloseDate <- as.Date(claimRaw$LandClaimCloseDate, format = "%Y-%m-%d")
+claims$contentsClaimCloseDate <- as.Date(claimRaw$ContentsClaimCloseDate, format = "%Y-%m-%d")
+claims$latestAssessmentDate <- as.Date(claimRaw$LatestAssessmentDate, format = "%Y-%m-%d")
+claims$buildingCoverStartDate <- as.Date(claimRaw$BuildingCoverStartDate , format = "%Y-%m-%d")
+claims$buildingCoverEndDate <- as.Date(claimRaw$BuildingCoverEndDate, format = "%Y-%m-%d")
 
 #sorting out IDs
-claimWorking$PortfolioID <- as.numeric(claimRaw$PortfolioID)
+claims$portfolioID <- as.numeric(claimRaw$PortfolioID)
+claims$claimID <- as.numeric(claimRaw$ClaimID)
+
+# converting other columns to numeric
+sapply(claims, class)
+claims[12:17] <- lapply(claims, function(x) as.numeric(as.character(x)))
+claims[28:31] <- lapply(claims, function(x) as.numeric(as.character(x)))
+claims[40] <- lapply(claims, function(x) as.numeric(as.character(x)))
+claims[42] <- lapply(claims, function(x) as.numeric(as.character(x)))
+
+claims <- as.numeric(claims[5:6])
+sapply(claims, class)
 
 rm(claimRaw) 
+rm(first.letter)
+rm(other.letters)
+rm(newnames)
+
 
 
 
