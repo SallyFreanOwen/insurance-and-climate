@@ -51,7 +51,6 @@ claims[28:31] <- lapply(claims, function(x) as.numeric(as.character(x)))
 claims[40] <- lapply(claims, function(x) as.numeric(as.character(x)))
 claims[42] <- lapply(claims, function(x) as.numeric(as.character(x)))
 
-claims <- as.numeric(claims[5:6])
 sapply(claims, class)
 
 rm(claimRaw) 
