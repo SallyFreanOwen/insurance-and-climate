@@ -1,6 +1,8 @@
 # Step 0 (for new computers) - installing packages 
 
 suppressPackageStartupMessages({
+  install.packages("stargazer")
+install.packages("pastecs")
 install.packages("tidyverse")
 install.packages("roperators")
 install.packages("sf")
