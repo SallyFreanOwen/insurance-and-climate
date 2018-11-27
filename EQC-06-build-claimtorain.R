@@ -3,6 +3,15 @@
 # Splitting out the lat longs 
 claimPortfolioSpatial$vcsnLatitude <- st_coordinates(claimPortfolioSpatial$vcsnPoint)[,1]
 claimPortfolioSpatial$vcsnLongitude <- st_coordinates(claimPortfolioSpatial$vcsnPoint)[,2]
-#note rounded to 3dp
 
-claimPortfolioSpatialVCSN <- merge(claimPortfolioSpatial, vcsn, by = c("vcsnLatitude", "vcsnLongitude"))
+# Subsetting - only the columns I actually want... 
+claimPortfolioSpatial06 <- dplyr::select(claimPortfolioSpatial,
+                                  claimID, 
+                                  portfolioID, 
+                                  lossDate, 
+                                  portfolioLatitude, 
+                                  portfolioLongitude, 
+                                  vcsnLatitude, 
+                                  vcsnLongitude)
+
+claimPortfolioSpatialVCS <- merge(claimPortfolioSpatial06, vcsn, by = c("vcsnLatitude", "vcsnLongitude"))
