@@ -72,38 +72,11 @@ openandsave <- function(ncname) {
   
   # Replace netCDF fill values with NA's
   rain_array[rain_array==fillvalue$value] <- NA
-  
-  # get a single slice or layer (January)
-  #m <- 1
-  #rain_slice <- rain_array[,,m]
-  #dim(rain_slice) #checking dimensions (verifyign this is what I think it is) 
-  #rain_slice_r <- raster(t(rain_slice), xmn=min(lon), xmx=max(lon), ymn=min(lat), ymx=max(lat), crs=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs+ towgs84=0,0,0"))
-  #plot(rain_slice_r) # quick map (again verifying this is what I think it is) 
-  
+
   # create dataframe -- reshape data
   # matrix (nlon*nlat rows by 2 cols) of lons and lats
   lonlat <- as.matrix(expand.grid(lon,lat))
   dim(lonlat)
-  
-  # vector of `rain` values
-  #rain_vec <- as.vector(rain_slice)
-  #length(rain_vec)
-  
-  # create dataframe and add names
-  #rain_df01 <- data.frame(cbind(lonlat,rain_vec))
-  #names(rain_df01) <- c("lon","lat",paste(dname,as.character(m), sep="_"))
-  #head(na.omit(rain_df01), 10)
-  
-  # set path and filename
-  #csvname <- "rain_df_VCSN_Rain5k_1999_day1.csv"
-  #csvfile <- paste(csvname, sep="")
-  #write.table(na.omit(rain_df01),csvfile, row.names=FALSE, sep=",") 
-  
-  
-  # Convert the whole array to a data frame 
-  # this piece saves the whole first year of data 
-  ###### 
-  # Convert the whole array to a data frame 
   
   # reshape the array into vector
   rain_vec_long <- as.vector(rain_array)
@@ -123,24 +96,9 @@ openandsave <- function(ncname) {
   
   #At this point we could add a variable containing summary statistics to each grid if we wanted 
   
-  # Sense check - what size is this matrix? Should be 365 days of observations of rain + lat long variables 
-  # Worked!
-  
   # write out the dataframe as a .csv file
   csvfile <- paste(ncname, ".csv", sep="")
   write.table(rain_df02,csvfile, row.names=FALSE, sep=",")
-  
-  # create a dataframe without missing values (in case this is useful later)
-  #rain_df03 <- na.omit(rain_df02)
-  #head(rain_df03, 20)
-  
-  #Check what's in the current workspace now:
-  #ls()
-  
-  
-  # Some extra notes
-  ######
-  # Other notes:
   
   # This was the nicest example I found to work from:
   # http://geog.uoregon.edu/bartlein/courses/geog490/week04-netCDF.html 
@@ -266,7 +224,6 @@ library(sf)
 #names(precip_table) <- gsub(".", "", names(precip_table))
 precip_table <- read.csv("Data/VCSN_Rain5k_1999_2000.csv", sep=",", stringsAsFactors = FALSE)
 names(precip_table) <- gsub("X", "precip", names(precip_table))
-
 
 # This has columns for lat & lon, then a column for each day, containing rainfall 
 # Note the "centroid" is not actually a centroid (just NIWA's coordinates for each grid)
