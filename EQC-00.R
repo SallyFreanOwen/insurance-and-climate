@@ -2,6 +2,7 @@
 
 suppressPackageStartupMessages({
   install.packages("stargazer")
+  install.packages("lattice")
 install.packages("pastecs")
 install.packages("tidyverse")
 install.packages("roperators")
