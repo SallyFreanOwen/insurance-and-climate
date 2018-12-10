@@ -15,5 +15,5 @@ claimPortfolioSpatial06 <- dplyr::select(claimPortfolioSpatial,
                                   vcsnLongitude)
 
 # Add rainfall to claim info 
-claimPortfolioSpatialVCS <- merge(claimPortfolioSpatial06, vcsn, by = c("vcsnLatitude", "vcsnLongitude"))
+claimPortfolioSpatialVCS <- merge(claimPortfolioSpatial06, vcsn, by = c("vcsnLongitude", "vcsnLatitude"))
 

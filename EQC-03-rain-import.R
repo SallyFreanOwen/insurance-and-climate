@@ -99,7 +99,7 @@ openandsave <- function(ncname) {
   # write out the dataframe as a .csv file
   csvfile <- paste(ncname, ".csv", sep="")
   write.table(rain_df02,csvfile, row.names=FALSE, sep=",")
-  
+
   # This was the nicest example I found to work from:
   # http://geog.uoregon.edu/bartlein/courses/geog490/week04-netCDF.html 
 }
@@ -166,32 +166,26 @@ VCSN_Rain5k_2014 <- read.csv("Data/VCSN_Rain5k_2014.csv", stringsAsFactors = FAL
 VCSN_Rain5k_2015 <- read.csv("Data/VCSN_Rain5k_2015.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2016 <- read.csv("Data/VCSN_Rain5k_2016.csv", stringsAsFactors = FALSE)
 
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_1999, VCSN_Rain5k_2000, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_2000, VCSN_Rain5k_2001, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2001, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_1999, VCSN_Rain5k_2000, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2001, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2002, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2003, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2004, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2005, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2006, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2007, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2008, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2009, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2010, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2011, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2012, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2013, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2014, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2015, by=c("lon", "lat"))
-#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2016, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2005, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2006, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2007, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2008, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2009, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2010, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2011, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2012, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2013, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2014, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2015, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2016, by=c("lon", "lat"))
 
 # write out the dataframe as a .csv file
-#csvfile <- paste("Data/VCSN_Rain5k_1999_2016", ".csv", sep="")
-#write.table(VCSN_Rain5k_working, csvfile, row.names=FALSE, sep=",")
-#csvfile <- paste("Data/VCSN_Rain5k_1999_2000", ".csv", sep="")
-#write.table(VCSN_Rain5k_working, csvfile, row.names=FALSE, sep=",")
-
-csvfile <- paste("Data/VCSN_Rain5k_2000_2004", ".csv", sep="")
+csvfile <- paste("Data/VCSN_Rain5k_1999_2016", ".csv", sep="")
 write.table(VCSN_Rain5k_working, csvfile, row.names=FALSE, sep=",")
 
 # clean up workspace:
@@ -215,8 +209,6 @@ rm(VCSN_Rain5k_2015)
 rm(VCSN_Rain5k_2016)
 rm(VCSN_Rain5k_working)
 
-# EQC 5 - niwa data import 
-
 # setwd("~/EQC-climate-change-part-two")
 
 # load the ncdf4 package
@@ -225,25 +217,16 @@ library(sf)
 # Inputting:
 
 # Attempt at full set: note this won't compile to claims for the whole country (uses all 30GB)
-#precip_table <- read.csv("Data/VCSN_Rain5k_1999_2016.csv", sep=",", stringsAsFactors = FALSE)
-#names(precip_table) <- gsub("X", "precip", names(precip_table))
-#names(precip_table) <- gsub(".", "", names(precip_table))
-
-#Test for just 1999-2000: 
-#precip_table <- read.csv("Data/VCSN_Rain5k_1999_2000.csv", sep=",", stringsAsFactors = FALSE)
-#names(precip_table) <- gsub("X", "precip", names(precip_table))
-
-#Test for just 2000-2004: 
-precip_table <- read.csv("Data/VCSN_Rain5k_2000_2004.csv", sep=",", stringsAsFactors = FALSE)
+precip_table <- read.csv("Data/VCSN_Rain5k_1999_2016.csv", sep=",", stringsAsFactors = FALSE)
+head(names(precip_table))
 names(precip_table) <- gsub("X", "precip", names(precip_table))
-
+head(names(precip_table))
+#names(precip_table) <- gsub(".", "", names(precip_table))
 # This has columns for lat & lon, then a column for each day, containing rainfall 
 # Note the "centroid" is not actually a centroid (just NIWA's coordinates for each grid)
 
 precipWorking <- as.data.frame(precip_table)
-
 rm(precip_table)
-
 head(names(precipWorking))
 
 # prefer a "point / day / rain" column format for processing later on, with 
@@ -266,13 +249,12 @@ rm(ncname)
 vcsn <- precipWorking 
 names(vcsn) <- c("vcsnLongitude", "vcsnLatitude", "vcsnDay", "rain")
 
-
 vcsnWide <- dcast(vcsn, vcsnLatitude + vcsnLongitude ~ vcsnDay, value.var="rain")
 vcsnWide$long <- vcsnWide$vcsnLongitude
 vcsnWide$lat <- vcsnWide$vcsnLatitude
-
 vcsnWide <- st_as_sf(vcsnWide, coords = c("long", "lat"), crs = 4326) #note crs tells it the latlons are wgs84
 
 #vcsnWorking <- melt(vcsnWide, id=c("vcsnLatitude", "vcsnLongitude"))
 
 rm(precipWorking)
+
