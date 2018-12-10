@@ -1,0 +1,103 @@
+
+
+From: Geoffrey Spurr <GSpurr@eqc.govt.nz>
+Sent: Monday, August 20, 2018 5:03 PM
+To: Sally Owen
+Cc: ilan.noy@vuw.ac.nz
+Subject: RE: Public insurance and climate change - request for updated data
+ 
+Hi Sally,
+
+ 
+
+Apologies for the delay. You should soon receive an email from our new file sharing system (the old SFTP server has been decommissioned), with instructions to download the data.
+
+ 
+
+Note that there are a few caveats and changes since the last data set:
+
+ 
+
+There is a new column called SourceSystem. This specifies where the data came from – CMS4 (our old system where the previous extracts came from), CMS8 (our new system), or Migrated (created in CMS4 and subsequently migrated to CMS8). The CMS4 rows should behave essentially the same as the old data. The CMS8 rows are missing some columns (null values) as this data is no longer stored. The Migrated rows are pieced together using data from both CMS8 and CMS4, and may have some data that CMS8 claims don’t (as it’s taken from CMS4 instead).
+
+ 
+
+For the basics though, all of these are equivalent.
+
+ 
+
+Some columns have different values between the different systems. For example, BuildingInsurerPolicyStatus has ‘Verified’ in CMS4, but ‘Valid’ in CMS8.
+
+ 
+
+Three other new columns are LossLocationEastingNZTMRounded, LossLocationEastingNZTMRounded, and Suburb.
+
+ 
+
+LossLocationEastingNZTMRounded and LossLocationEastingNZTMRounded contain NZTM coordinates (sorry, I know this is different from the WGS84 coordinates in the Portfolio dataset – it’s just what we have in this system) for CMS4 claims where there is no PortfolioID available, so that you can still locate them. These are rounded to the nearest 50m. In many cases, this is actually the centre point of the street or suburb, as the address matching system was not able to locate the exact dwelling (hence no PortfolioID in the first place).
+
+ 
+
+There are still some claims where there’s no PortfolioID and no coordinates. For these, you can use the Suburb column to get a rough location. Sometimes the suburb is actually the city, as that’s all that’s available. Some of these are also manually entered, so may have typos or other junk.
+
+ 
+
+CMS8 claims don’t have NZTM coordinates available, so you will have to rely on the portfolio coordinates via PortfolioID as usual, or the suburb/city.
+
+ 
+
+The final new column is ClaimStatus, which reflects the status of the claim as a whole (not just individual exposures). This is so you can identify claims that have been declined. Note that this also changes values between CMS4 and CMS8.
+
+ 
+
+The EqcPropertyGroup column has changed. The values in this column do not match the EqcPropertyGroup values in any old extracts. This was to avoid negative values – let me know if you want to match them.
+
+ 
+
+The CMS4 values for BuildingPolicyType have been changed to be consistent with CMS8 (I did this as they could be mapped 1:1).
+
+ 
+
+CMS8 does not have Net Incurred values. Technically it does (in a sense), but the claims process no longer uses reserve values, so the Net Incurred values would always be zero until a payment is made, so they would just equal the paid amounts. I wouldn’t recommend using Net Incurred values anyway.
+
+ 
+
+CMS8 also does not have NumBedrooms, ImminentLoss, WeatherProof, Foundations, or FloorConstruction.
+
+ 
+
+Claims with a source system of CMS4 that have open exposures (building/land/contents) or are open as a whole, can be treated as closed and fully paid. CMS4 no longer exists, so any claims open at the time it was decommissioned were either migrated (so SourceSystem = “Migrated”) or were considered closed.
+
+ 
+
+Claims from before around 14 March 2008 were migrated from an old system (pre-CMS4). Subsequently there are some fields which do not have data for these claims (e.g. assessment values). The exposure (building/land/contents) open dates are not correct (they are the date of migration instead) as the old system did not store this data. Essentially, you should use the ClaimOpenDate if it is earlier than these dates, if you want the exposure open dates (or rather as close as you can get). The exposure closed dates are mostly missing for these claims for the same reason.
+
+ 
+
+As mentioned in a previous email, the assessment, remediation, and valuation values for CMS8 claims are not trustworthy. They are the most recent values in the system. This may be a delta value, not the true full value.
+
+ 
+
+There is no update to the portfolio data set, as this is static, so what you have is the latest.
+
+ 
+
+ 
+
+Sorry, that’s quite a lot! Let me know if you have any questions.
+
+ 
+
+Cheers,
+
+Geoff
+
+ 
+
+Geoffrey Spurr | Senior Analyst | Resilience
+
+Earthquake Commission
+
+Wellington
+
+Ph: +64 4 901 6624 | Ext: 6397 | Mob: 029 978 6427 | gspurr@eqc.govt.nz
