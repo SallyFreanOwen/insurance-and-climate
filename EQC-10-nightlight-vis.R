@@ -103,14 +103,21 @@ plot(r4)
 # Crop to box around welly 
 #test2 <- crop(rast1, e2)
 
+#using cropped raster, converting to points (idea being to recreate nearest neighbour method from niwa grid to portfolio link)
 r4p <- rasterToPoints(r4, spatial = TRUE)
 r4p2 <- st_as_sf(r4p, crs = 4326)
 
+#basic vis:
+# Plot one month's "points"
+par(mar=c(1,1,1,1)) # (making margins large enough) 
+plot(st_geometry(r4p2))
+# Plot one month's nightlight values
+plot(r4p2$SVDNB_npp_20120401.20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h)
 
 # print summary stats for this data:
 #install.packages("stargazer") #needed if working via rocker geospatial
-library(stargazer)
-stargazer(r4p2)
+#library(stargazer)
+#stargazer(r4p2)
 
 #### Alternately - could use stars 
 
