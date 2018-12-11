@@ -1,0 +1,40 @@
+README for Version 1 Nighttime VIIRS Day/Night Band Composites
+  Updated 20171218
+
+The Earth Observations Group (EOG) at NOAA/NCEI is producing a version 1 suite of average radiance composite images using nighttime data from the Visible Infrared Imaging Radiometer Suite (VIIRS) Day/Night Band (DNB). 
+
+The version 1 products span the globe from 75N latitude to 65S. The products are produced in 15 arc-second geographic grids and are made available in geotiff format as a set of 6 tiles. The tiles are cut at the equator and each span 120 degrees of latitude. Each tile is actually a set of images containing average radiance values and numbers of available observations. 
+
+--
+Monthly Composites: 
+
+In the monthly composites, there are many areas of the globe where it is impossible to get good quality data coverage for that month. This can be due to cloud-cover, especially in the tropical regions, or due to solar illumination, as happens toward the poles in their respective summer months. Therefore, it is imperative that users of these data utilize the cloud-free observations file and not assume a value of zero in the average radiance image means that no lights were observed. 
+
+The version 1 monthly series is run globally using two different configurations. The first excludes any data impacted by stray light. The second includes these data if the radiance vales have undergone the stray-light correction procedure (Reference). These two configurations are denoted in the filenames as "vcm" and "vcmsl" respectively. The "vcmsl" version, that includes the stray-light corrected data, will have more data coverage toward the poles, but will be of reduced quality. It is up to the users to determine which set is best for their applications. 
+
+---
+File Delivery and Naming Conventions:
+
+The version 1 composite products are delivered as compressed tarballs containing geotiff formatted files.  Each geotiff filename has 7 filename fields that are separated by an underscore "_". Internal to each field there can be an additional dash separator "-". These fields are followed by a filename extension. The fields are described below using this example filename:
+
+SVDNB_npp_20140501-20140531_global_vcmcfg_v10_c201502061154.avg_rade9h
+
+Field 1: VIIRS SDR or Product that made the composite "SVDNB" 
+Field 2: satellite name "npp" 
+Field 3: date range "20140501-20140531"
+Field 4: ROI "global" 
+Field 5: config shortname "vcmcfg"
+Field 6: version "v10" is version 1.0 
+Field 7: creation date/time 
+Extension: avg_rade9h
+
+--
+
+Each monthly tarball contains 2 files, the first one is the average DNB radiance, the second contains the number of cloud-free observations used in the average. They are distinguishable by their filename extensions, avg_rade9h.tif and cf_cvg.tif, respectively.
+Example: 
+  SVDNB_npp_20170101-20170131_00N060E_vcmslcfg_v10_c201702241225.tgz
+  contains:
+    SVDNB_npp_20170101-20170131_00N060E_vcmslcfg_v10_c201702241225.avg_rade9h.tif
+    SVDNB_npp_20170101-20170131_00N060E_vcmslcfg_v10_c201702241225.cf_cvg.tif 
+    
+    
