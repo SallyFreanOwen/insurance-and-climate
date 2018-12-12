@@ -21,7 +21,7 @@ stack1 <- stack(rast1, rast2)
 wgs84 <- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 projection(rast4) <- CRS(wgs84)
 
-#plot(rast1)
+plot(rast1)
 #plot(stack1)
 
 ## crop to NZ only 
@@ -40,7 +40,6 @@ plot(test,
      box = FALSE,
      axes = FALSE,
      main = "First look")
-
 
 breakpoints <- c(0,1,5,10,20,24)
 
@@ -62,11 +61,9 @@ plot(testr,
 
 #######
 
-require(rgdal)
-shape1 <- readOGR(dsn = "Data", layer = "meshblock-2018-generalised")
-
-require(sf)
-shape2 <- read_sf(dsn = "Data", layer = "meshblock-2018-generalised")
+library(rgdal)
+#shape1 <- readOGR(dsn = "Data", layer = "meshblock-2018-generalised")
+#shape2 <- read_sf(dsn = "Data", layer = "meshblock-2018-generalised")
 
 #enz <- extent(shape1)
 
