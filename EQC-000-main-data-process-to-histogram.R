@@ -4,7 +4,8 @@
 
 #0 - for new machines (installing packages) 
 #source("EQC-0.R")
-# Also at this point, add the Data to a folder called Data in the project. #NB note data names etc. 
+
+# - add the Data to a folder called Data in the project. #NB note data names etc. 
 
 # 1 - eqc claims csv to r dataframe (including lossdate as an r date) 
 source("EQC-01-claims-import.R")
