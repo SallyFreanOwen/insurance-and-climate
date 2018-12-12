@@ -24,6 +24,7 @@ first.letter  <- tolower(substring(names(claims),1, 1))
 other.letters <- substring(names(claims), 2)
 newnames      <- paste(first.letter, other.letters, sep="")
 names(claims) <- newnames
+names(claims)[1] <- "claimID" # first name issue: 
 
 #Sorting out dates
 sapply(claims, class)
@@ -52,6 +53,13 @@ claims[40] <- lapply(claims, function(x) as.numeric(as.character(x)))
 claims[42] <- lapply(claims, function(x) as.numeric(as.character(x)))
 
 sapply(claims, class)
+
+# keep only landslip / storm / flood claims
+claims <- filter(claims, claims$eventType == "Landslip/Storm/Flood")
+# and only post-2000 events 
+claims <- filter(claims, claims$eventDate > "1999-12-31")
+# and only those which can be linked to portfolios 
+claims <- filter(claims, claims$portfolioID != "NULL")
 
 rm(claimRaw) 
 rm(first.letter)
