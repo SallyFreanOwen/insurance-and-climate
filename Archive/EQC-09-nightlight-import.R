@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 
 # Downloading:
@@ -23,7 +23,7 @@ untar("Data/S201205.tar", exdir="Data")
 
 
 # Note full set downloaded directly through the terminal - using url codes in the urls.txt file 
-=======
+#=======
 
 
 # Downloading:
@@ -51,12 +51,10 @@ library(sf)
 
 # note tifs in . not Data/
 
-##Obtain a list of TIF files, load in the first file in list
+##Obtain a list of TIF files, load in the first file in list  
 tifs = list.files("Data", pattern = "\\.tif")
 rast1 <- raster(paste("Data", "/", tifs[1], sep=""))
-rast2 <- raster(paste("Data", "/", tifs[2], sep=""))
-rast3 <- raster(paste("Data", "/", tifs[3], sep=""))
-rast4 <- raster(paste("Data", "/", tifs[4], sep=""))
+rast2 <- raster(paste("Data", "/", tifs[3], sep=""))
 
 # testing different aggregation options 
 stack1 <- stack(rast1, rast2, rast3, rast4)

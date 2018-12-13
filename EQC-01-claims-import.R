@@ -16,6 +16,7 @@ claimRaw <- read.csv("Data/Motu_EQC_claims_post_2000.csv", stringsAsFactors = FA
 # check variable "types"
 sapply(claimRaw, class)
 head(claimRaw$EventDate)
+names(claimRaw)[1] <- "ClaimID" # first name issue: 
 
 claims <- claimRaw
 
@@ -24,7 +25,6 @@ first.letter  <- tolower(substring(names(claims),1, 1))
 other.letters <- substring(names(claims), 2)
 newnames      <- paste(first.letter, other.letters, sep="")
 names(claims) <- newnames
-names(claims)[1] <- "claimID" # first name issue: 
 
 #Sorting out dates
 sapply(claims, class)
@@ -37,7 +37,7 @@ claims$contentsClaimOpenDate <- as.Date(claimRaw$ContentsClaimOpenDate, format =
 claims$buildingClaimCloseDate <- as.Date(claimRaw$BuildingClaimCloseDate, format = "%Y-%m-%d")
 claims$landClaimCloseDate <- as.Date(claimRaw$LandClaimCloseDate, format = "%Y-%m-%d")
 claims$contentsClaimCloseDate <- as.Date(claimRaw$ContentsClaimCloseDate, format = "%Y-%m-%d")
-claims$latestAssessmentDate <- as.Date(claimRaw$LatestAssessmentDate, format = "%Y-%m-%d")
+#claims$latestAssessmentDate <- as.Date(claimRaw$LatestAssessmentDate, format = "%Y-%m-%d")
 claims$buildingCoverStartDate <- as.Date(claimRaw$BuildingCoverStartDate , format = "%Y-%m-%d")
 claims$buildingCoverEndDate <- as.Date(claimRaw$BuildingCoverEndDate, format = "%Y-%m-%d")
 
@@ -45,13 +45,14 @@ claims$buildingCoverEndDate <- as.Date(claimRaw$BuildingCoverEndDate, format = "
 claims$portfolioID <- as.numeric(claimRaw$PortfolioID)
 claims$claimID <- as.numeric(claimRaw$ClaimID)
 
+# check other columns 
+sapply(claims, class) # note mostly character 
 # converting other columns to numeric
-sapply(claims, class)
 claims[12:17] <- lapply(claims, function(x) as.numeric(as.character(x)))
 claims[28:31] <- lapply(claims, function(x) as.numeric(as.character(x)))
 claims[40] <- lapply(claims, function(x) as.numeric(as.character(x)))
 claims[42] <- lapply(claims, function(x) as.numeric(as.character(x)))
-
+# re-check: 
 sapply(claims, class)
 
 # keep only landslip / storm / flood claims

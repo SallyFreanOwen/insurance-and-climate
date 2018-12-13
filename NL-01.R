@@ -18,12 +18,15 @@ nl201204nzsqr <- st_crop(x=nl201204, y=nzboundary)
 # eyeball
 plot(nl201204nzsqr)
 
-#extract coordinates 
-nlNzSqrPoints <- st_coordinates(nl201204nzsqr)
+##extract coordinates 
+
+#nlNzSqrPoints <- st_coordinates(nl201204nzsqr)
 # set as sf object
-nlNzSqrPoints$lat <- nlNzSqrPoints$x
-nlNzSqrPoints$long <- nlNzSqrPoints$y
-nlNzSqrPointsSF <- st_as_sf(nlNzSqrPoints, coords = c("long", "lat"), crs = 4326)
+#nlNzSqrPoints$lat <- nlNzSqrPoints$x
+#nlNzSqrPoints$long <- nlNzSqrPoints$y
+#nlNzSqrPointsSF <- st_as_sf(nlNzSqrPoints, coords = c("long", "lat"), crs = 4326)
+
+
 
 #attach portfolio to nearest nlPoint 
 #linkTest <- st_nearest_points(portfolios,nlNzSqrPointsSF, pairwise = FALSE)
