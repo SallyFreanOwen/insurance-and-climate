@@ -25,10 +25,10 @@ source("EQC-05-build-claimportfoliospatial.R")
 # 6 - add all rain to claims
 source("EQC-06-build-claimtorain.R")
 
-# 7 - subset
-source("EQC-07-creating-hist-inputs.R")
+# 7 - subset and build barcharts 
+source("EQC-07-four-rain-to-lossdate-barcharts.R")
 
-# 8 - build barcharts 
-source("EQC-08-histogram.R")
+
+
 
 
