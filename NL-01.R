@@ -6,21 +6,22 @@ library(sf)
 library(raster)
 
 ## open test TIFs individually as stars
-#nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif")
-#nl201205 <- read_stars("Data/SVDNB_npp_20120501-20120531_00N060E_vcmcfg_v10_c201605121458.avg_rade9h.tif")
-str(nl201204) # print details 
-#plot(nl201204) #eyeball
+
+nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif")
+nl201205 <- read_stars("Data/SVDNB_npp_20120501-20120531_00N060E_vcmcfg_v10_c201605121458.avg_rade9h.tif")
+memory.limit(100000)
+plot(nl201204) #eyeball
+plot(nl201205)
+#par(mar = rep(0,4))
+#image(y, col = grey((4:10)/10))
 
 ##testing multiple layers into stars:
 x=c(
   "Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif",
   "Data/SVDNB_npp_20120501-20120531_00N060E_vcmcfg_v10_c201605121458.avg_rade9h.tif"
   )
-#memory.limit(100000)
 y=read_stars(x, quiet=TRUE) 
 y
-
-str(nl201204) # print deta
 
 ## crop to box around NZ
 
@@ -63,3 +64,5 @@ y2 <- st_crop(x=y, y=nzboundary)
 #} 
 #names(dtalist) <- fnames 
 ## now you can optionally refer to dtalist$file20120424.csv or dtalist[["file20120424"]] if you wish. 
+
+# Ideally would include the gsub of the file's name with the date in it somewhere.. 
