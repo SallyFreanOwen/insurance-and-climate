@@ -37,8 +37,44 @@ nl201205nzsqr <- st_crop(x=nl201205, y=nzboundary)
 plot(nl201204nzsqr)
 plot(nl201205nzsqr)
 # as a set of two:
-y2 <- st_crop(x=y, y=nzboundary)
+#y2 <- st_crop(x=y, y=nzboundary)
 #plot(y2)
+
+## crop to smaller samples::  
+
+## create sf object of boundary box around portfolios in NZ 
+wgtnboundary <- st_bbox(filter(portfolios, portfolios$nzRegionNumber=="9"))
+wiltonboundary <- st_bbox(filter(portfolios, portfolios$nzCensusAreaUnit=="574702"))
+aklboundary <- st_bbox(filter(portfolios, portfolios$nzRegionNumber=="2"))
+nldboundary <- st_bbox(filter(portfolios, portfolios$nzRegionNumber=="1"))
+
+#test <- st_bbox(filter(portfolios, 
+                        portfolios$nzRegionNumber=="9", 
+                        portfolios$nzCensusAreaUnit < "574800",
+                        portfolios$nzCensusAreaUnit > "57700"
+                        ))
+#testwgtnzoom <- st_crop(x=nl201204, y=test)
+
+## crop TIF to NZ boundary box 
+#individually:
+wgtn201204nzsqr <- st_crop(x=nl201204, y=wgtnboundary)
+wgtn201205nzsqr <- st_crop(x=nl201205, y=wgtnboundary)
+wilton201204nzsqr <- st_crop(x=nl201204, y=wiltonboundary)
+akl201204nzsqr <- st_crop(x=nl201204, y=aklboundary)
+akl201205nzsqr <- st_crop(x=nl201205, y=aklboundary)
+nld201204nzsqr <- st_crop(x=nl201204, y=nldboundary)
+nld201205nzsqr <- st_crop(x=nl201205, y=nldboundary)
+
+# eyeball Wellington
+plot(wgtn201204nzsqr)
+plot(wgtn201205nzsqr)
+plot(wilton201204nzsqr)
+# eyeball Auckland 
+plot(akl201204nzsqr)
+plot(akl201205nzsqr)
+# eyeball Northland 
+plot(nld201204nzsqr)
+plot(nld201205nzsqr)
 
 ##extract coordinates 
 #nlNzSqrPoints <- st_coordinates(nl201204nzsqr)
