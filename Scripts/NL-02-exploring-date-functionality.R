@@ -63,7 +63,9 @@ nl201204 ####  should return:
 #point	  logical; whether cells refer to points, or intervals
 #values	the sequence of values for this dimension (e.g., geometries)
 
-### So, we might like to create date, with a monthly time step, and inputing the data from the filename 
+### So, I'd like to create date, with a monthly time step, and inputing the data from the filename 
 # date 
 # from=1 to=N offset=2012-04-01 delta=1month refsys=POSIXct? 
+
+
 
