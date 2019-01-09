@@ -50,3 +50,20 @@ nl201204 ####  should return:
 ## x       1 360       -180      1      NA    NA   NULL
 ## y       1 180         90     -1      NA    NA   NULL
 ## time    1 365 2013-01-01 1 days POSIXct    NA   NULL
+
+## This being the case, we would ideally like to add a dimension that holds the information from the filename
+
+###For a stars object each dimension has a name, and the meaning of the fields in a sinlge dimension are:
+#field	  meaning
+#from	  the origin index (1)
+#to	    the final index (dim(x)[i])
+#offset	the start value for this dimension
+#delta	  the step size for this dimension
+#refsys	the reference system, or proj4string
+#point	  logical; whether cells refer to points, or intervals
+#values	the sequence of values for this dimension (e.g., geometries)
+
+### So, we might like to create date, with a monthly time step, and inputing the data from the filename 
+# date 
+# from=1 to=N offset=2012-04-01 delta=1month refsys=POSIXct? 
+
