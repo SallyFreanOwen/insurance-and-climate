@@ -25,8 +25,7 @@ nl201204 ####  should return:
 #  from    to     offset       delta                       refsys point values    
 #x    1 28800    59.9979  0.00416667 +proj=longlat +datum=WGS8... FALSE   NULL [x]
 #y    1 15600 0.00208333 -0.00416667 +proj=longlat +datum=WGS8... FALSE   NULL [y]
-
-# unfortunately doesn't seem to have time or date information stored in the stars object created direct fro mthe .tif 
+### unfortunately doesn't seem to have time or date information stored in the stars object created direct from the .tif 
 
 ### Stars functionality for time:
 
@@ -67,11 +66,14 @@ nl201204 ####  should return:
 # date 
 # from=1 to=N offset=2012-04-01 delta=1month refsys=POSIXct? 
 
+# may be a tidier solution in here: https://cran.r-project.org/web/packages/stars/stars.pdf 
+
 #######
 
-# Step one: 
-# save data from filename as text string: 
+# 1) Manually add a dimension to a stars object 
 
+
+# 2) Save data from filename as text string and use this to automate method above 
 
 ### Possible method to work with below: 
 #  fnames = list.files(path = getwd()) 
