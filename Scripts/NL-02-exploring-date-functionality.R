@@ -67,5 +67,21 @@ nl201204 ####  should return:
 # date 
 # from=1 to=N offset=2012-04-01 delta=1month refsys=POSIXct? 
 
+#######
+
+# Step one: 
+# save data from filename as text string: 
+
+
+### Possible method to work with below: 
+#  fnames = list.files(path = getwd()) 
+## preallocating the list for efficiency (execution speed) 
+#dtalist <- vector( "list", length(fnames) ) 
+#for (i in seq_len(length(fnames))){ 
+#  dtalist[[i]] <- read.csv.sql(fnames[i], sql = "select * from file where V3 == 'XXX' and V5=='YYY'",header = FALSE, sep= '|', eol ="\n")) 
+#dtalist[[i]]$date <-  substr(fnames[i],1,8)) 
+#} 
+#names(dtalist) <- fnames 
+
 
 
