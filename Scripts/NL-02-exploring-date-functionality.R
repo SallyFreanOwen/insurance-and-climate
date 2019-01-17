@@ -52,15 +52,17 @@ nl201204 ####  should return:
 
 ## This being the case, we would ideally like to add a dimension that holds the information from the filename
 
-###For a stars object each dimension has a name, and the meaning of the fields in a sinlge dimension are:
-#field	  meaning
-#from	  the origin index (1)
-#to	    the final index (dim(x)[i])
-#offset	the start value for this dimension
+###For a stars object each dimension has a name
+###The meaning of the fields in a single dimension are:
+
+#field:	  meaning:
+#from	    the origin index (1)
+#to	      the final index (dim(x)[i])
+#offset	  the start value for this dimension
 #delta	  the step size for this dimension
-#refsys	the reference system, or proj4string
+#refsys	  the reference system, or proj4string
 #point	  logical; whether cells refer to points, or intervals
-#values	the sequence of values for this dimension (e.g., geometries)
+#values	  the sequence of values for this dimension (e.g., geometries)
 
 ### So, I'd like to create date, with a monthly time step, and inputing the data from the filename 
 # date 
@@ -70,8 +72,11 @@ nl201204 ####  should return:
 
 #######
 
-# 1) Manually add a dimension to a stars object 
-
+## 1) Manually add a dimension to a stars object 
+# quickest fix (for me) sems to be just doing is in some other form (say as a netcdf) then converting back to stars 
+# could go via netcdf using https://www.rdocumentation.org/packages/ncdf4/versions/1.16/topics/ncdim_def or maybe as
+# this example does? https://stackoverflow.com/questions/44834829/expand-a-netcdf-variable-into-an-additional-dimension-or-multiple-variables 
+nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif")
 
 # 2) Save data from filename as text string and use this to automate method above 
 
