@@ -90,7 +90,10 @@ nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201
 #} 
 #names(dtalist) <- fnames 
 
+####################
 
+#An alternate solution: using raster first...
 
-
+str_name<-"Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif"
+imported_raster=raster(str_name)
 
