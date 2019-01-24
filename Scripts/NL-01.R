@@ -20,13 +20,13 @@ x=c(
   "Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif",
   "Data/SVDNB_npp_20120501-20120531_00N060E_vcmcfg_v10_c201605121458.avg_rade9h.tif"
   )
-y=read_stars(x, quiet=TRUE) 
+y=read_stars(x, along="new_dimension", quiet=TRUE) 
 y
 
 ## crop to box around NZ
 
 ## create sf object of boundary box around portfolios in NZ 
-source("EQC-02-portfolio-import.R") # if haven't already loaded eqc property data 
+source("Scripts/EQC-02-portfolio-import.R") # if haven't already loaded eqc property data 
 nzboundary <- st_bbox(portfolios)
 
 ## crop TIF to NZ boundary box 

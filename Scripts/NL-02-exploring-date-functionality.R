@@ -10,6 +10,7 @@ library(raster)
 ## open test TIFs individually as stars
 
 nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif")
+nl201205 <- read_stars("Data/SVDNB_npp_20120501-20120531_00N060E_vcmcfg_v10_c201605121458.avg_rade9h.tif")
 
 nl201204 ####  should return: 
 #stars object with 2 dimensions and 1 attribute
@@ -72,28 +73,32 @@ nl201204 ####  should return:
 
 #######
 
-## 1) Manually add a dimension to a stars object 
-# quickest fix (for me) sems to be just doing is in some other form (say as a netcdf) then converting back to stars 
-# could go via netcdf using https://www.rdocumentation.org/packages/ncdf4/versions/1.16/topics/ncdim_def or maybe as
-# this example does? https://stackoverflow.com/questions/44834829/expand-a-netcdf-variable-into-an-additional-dimension-or-multiple-variables 
-nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif")
+#Alternately... 
+## 1) Manually add time to a stars object 
+mutate(nl201204, time=201204) # adds an attribute containing "time" which is fixed in all grids 
+mutate(nl201205, time=201205) # adds an attribute containing "time" which is fixed in all grids 
+
+#then recreate as a raster.. .
+r_nl201204 <- as.raster(nl201204)
+r_nl201205 <- as.raster(nl201205)
+
+# then reopen as stars... 
+test <- read_stars(c(r_nl201204,r_nl201205))
+
+#testing above with smaller object... (requires nl_01 be run first) 
+mutate(wgtn201204nzsqr, time=201204) # adds an attribute containing "time" which is fixed in all grids 
+mutate(wgtn201205nzsqr, time=201205) # adds an attribute containing "time" which is fixed in all grids 
+#and then joining:
 
 # 2) Save data from filename as text string and use this to automate method above 
 
-### Possible method to work with below: 
-#  fnames = list.files(path = getwd()) 
-## preallocating the list for efficiency (execution speed) 
-#dtalist <- vector( "list", length(fnames) ) 
-#for (i in seq_len(length(fnames))){ 
-#  dtalist[[i]] <- read.csv.sql(fnames[i], sql = "select * from file where V3 == 'XXX' and V5=='YYY'",header = FALSE, sep= '|', eol ="\n")) 
-#dtalist[[i]]$date <-  substr(fnames[i],1,8)) 
-#} 
-#names(dtalist) <- fnames 
+# Questions to think about later:
+# - why/how are avgrad values sometimes negative? 
 
-####################
 
-#An alternate solution: using raster first...
-
-str_name<-"Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif"
-imported_raster=raster(str_name)
-
+### 
+tif = system.file("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif", package = "stars")
+x = read_stars(tif)
+(new = c(x, x))
+c(new) # collapses two arrays into one with an additional dimension
+c(x, x, along = 3)
