@@ -78,9 +78,9 @@ nl201204 ####  should return:
 mutate(nl201204, time=201204) # adds an attribute containing "time" which is fixed in all grids 
 mutate(nl201205, time=201205) # adds an attribute containing "time" which is fixed in all grids 
 
-#then recreate as a raster.. .
-r_nl201204 <- as.raster(nl201204)
-r_nl201205 <- as.raster(nl201205)
+#then recreate .
+sf_nl201204 <- st_as_sf(nl201204)
+sf_nl201205 <- st_as_sf(nl201205)
 
 # then reopen as stars... 
 test <- read_stars(c(r_nl201204,r_nl201205))
