@@ -34,9 +34,11 @@ nl201204 ####  should return:
 ## NB: at work computer I need to add the below before combined will work:
 #memory.limit(100000)
 
-## stars can combine the tifs and create a third using their filenames:
+## stars can combine the tifs and create a third using their filenames as the new dimension values:
 nl_combined <- c(c(nl201204,nl201205))
+nl_combined 
 
 ## next steps? 
-# simplify filenames to only the relevant time characters
-# figure out how to change newdimname to time 
+## simplify filenames to only the relevant time characters
+## figure out how to change newdimname to time 
+# stars::st_apply
