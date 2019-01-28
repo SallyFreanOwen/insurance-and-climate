@@ -40,5 +40,11 @@ nl_combined
 
 ## next steps? 
 ## simplify filenames to only the relevant time characters
+tifFilenames <- list.files(path = "Data/", pattern = "*avg_rade9h.tif", full.names = T) 
+nchar(tifFilenames)
+tifDates <- substr(tifFilenames, 16, 32)
+
 ## figure out how to change newdimname to time 
-# stars::st_apply
+# stars::st_dimensions() #get dimensions from stars object
+# stars::st_apply(nl_combined) #st_apply apply a function to one or more array dimensions
+
