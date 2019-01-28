@@ -42,6 +42,7 @@ nl_combined
 tifFilenames <- list.files(path = "Data/", pattern = "*avg_rade9h.tif", full.names = T) 
 nchar(tifFilenames)
 tifDates <- substr(tifFilenames, 16, 32)
+tifDates <- as.data.frame(tifDates)
 
 ## change newdimname to time 
 dimnames(nl_combined)[3]<-"time"
@@ -49,6 +50,7 @@ dimnames(nl_combined)[3]<-"time"
 ## next steps:
 
 ## figure out how to change dim values to new character list 
+# test <- as.tbl_cube(nl_combined) 
+
 # stars::st_dimensions() #get dimensions from stars object
 # stars::st_apply(nl_combined) #st_apply apply a function to one or more array dimensions
-
