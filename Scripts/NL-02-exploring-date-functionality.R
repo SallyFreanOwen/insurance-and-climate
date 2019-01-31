@@ -32,7 +32,7 @@ nl201204 ####  should return:
 ## ideally we want time as a third dimension 
 
 ## NB: at work computer I need to add the below before combined will work:
-#memory.limit(100000)
+memory.limit(100000)
 
 ## stars can combine the tifs and create a third using their filenames as the new dimension values:
 nl_combined <- c(c(nl201204,nl201205))
@@ -46,11 +46,20 @@ tifDates <- as.data.frame(tifDates)
 
 ## change newdimname to time 
 dimnames(nl_combined)[3]<-"time"
+#to take a "slice: by time, use 
+# nl_combined[,,,2] # the extra dimension is for choosing an array - ignore it. 
 
 ## next steps:
-
-## figure out how to change dim values to new character list 
-# test <- as.tbl_cube(nl_combined) 
-
 # stars::st_dimensions() #get dimensions from stars object
 # stars::st_apply(nl_combined) #st_apply apply a function to one or more array dimensions
+
+## figure out how to change dim values to new character list 
+test <- as.tbl_cube(nl_combined)
+
+
+for (i in 1:2){
+ mutate(test$dims$time[i], tifDates$tifDates[i])
+}
+ 
+
+
