@@ -38,6 +38,9 @@ memory.limit(100000)
 nl_combined <- c(c(nl201204,nl201205))
 nl_combined 
 
+
+#######################
+
 ## simplify filenames to only the relevant time characters
 tifFilenames <- list.files(path = "Data/", pattern = "*avg_rade9h.tif", full.names = T) 
 nchar(tifFilenames)
@@ -54,12 +57,12 @@ dimnames(nl_combined)[3]<-"time"
 # stars::st_apply(nl_combined) #st_apply apply a function to one or more array dimensions
 
 ## figure out how to change dim values to new character list 
-test <- as.tbl_cube(nl_combined)
+#test <- as.tbl_cube(nl_combined)
+#for (i in 1:2){
+# mutate(test$dims$time[i], tifDates$tifDates[i])
+  
 
 
-for (i in 1:2){
- mutate(test$dims$time[i], tifDates$tifDates[i])
-}
  
 
 
