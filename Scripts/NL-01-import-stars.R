@@ -1,14 +1,12 @@
 ### Note: to use this file first download data using "NL-00-test-nightlight-import.R" or [insert name of terminal code to download all NOAA tifs here]
 
 # Working with NOAA/NASA nighttime light TIFs 
-
 library(stars)
 library(dplyr)
 library(sf)
 library(raster)
 
 ## open test TIFs individually as stars
-
 nl201204 <- read_stars("Data/SVDNB_npp_20120401-20120430_00N060E_vcmcfg_v10_c201605121456.avg_rade9h.tif")
 nl201205 <- read_stars("Data/SVDNB_npp_20120501-20120531_00N060E_vcmcfg_v10_c201605121458.avg_rade9h.tif")
 
@@ -39,6 +37,5 @@ nzboundary <- st_bbox(portfolios)
 ## crop to NZ boundary box 
 #individually:
 nl_combined <- st_crop(x=nl_combined, y=nzboundary, crop=TRUE, epsilon=0)
-
 
 ## 
