@@ -15,10 +15,6 @@ portfolioNLSpatial_subset <- dplyr::select(portfolioNLSpatial,
                                          nlLongitude)
 
 
-#add NL to portfolio info 
-portfolioNL <- merge(portfolioNLSpatial_subset, nl_combined, by = c("nlLongitude", "nlLatitude"))
-
-# Add rainfall to claim info 
-#claimPortfolioSpatialVCS <- merge(claimPortfolioSpatial06, vcsn, by = c("vcsnLongitude", "vcsnLatitude"))
-
+# Add NL to portfolio info 
+portfolioNL <- merge(x = portfolioNLSpatial_subset, y = nl_combined$attr, by = c("nlLongitude", "nlLatitude"))
 
