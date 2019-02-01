@@ -10,12 +10,14 @@ library(htmltools);
 library(SearchTrees)
 library(devtools)
 
-## Find indices of the two nearest points in A to each of the points in B
-tree <- createTree(st_coordinates(nl_201204))
-inds <- knnLookup(tree, newdat=st_coordinates(portfolios), k=1) # can be 2 or more
+test <- st_as_sfc(nl_combined, as_points=TRUE, na.rm=TRUE)
+
+## Find indices of the nearest point in A to each of the points in B
+tree <- createTree(st_coordinates(test)) #A=nl
+inds <- knnLookup(tree, newdat=st_coordinates(portfolios), k=1) #B=portfolios #can be 2 or more
 
 # Create a tibble of the index 
-spatial <- tibble("vcsnPoint"=vcsnWide$geometry[inds[,1]],
+spatial <- tibble("nlPoint"=test[inds[,1]],
                   "portfolioID"=portfolios$portfolioID,
                   "portfolioPoint"=portfolios$geometry)
 
