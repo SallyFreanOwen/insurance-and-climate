@@ -1,5 +1,8 @@
 #NL-02-grid-to-portfolio-join 
 
+install.packages("SearchTrees")
+install.packages("Imap")
+
 library(tidyverse);
 library(sf);
 library(rvest);
@@ -7,7 +10,6 @@ library(SearchTrees);
 library(Imap);
 library(leaflet);
 library(htmltools);
-library(SearchTrees)
 library(devtools)
 
 test <- st_as_sfc(nl_combined, as_points=TRUE, na.rm=TRUE)
