@@ -6,7 +6,11 @@ The two R scripts in this folder perform different functions.
 
 "Accessing CCII netcdf files" is a work in progress, noting Sally's first attempts to extract the CCII Precipitation data into a format which is compatible with the economic claim and property information. It draws on data stored in "R:\Agriculture\Deep_South_Challenge_2017\DATA\CCII"
 
+<<<<<<< HEAD
 "Extracting grid IDs" is exactly what the name suggests - identifying the coordinates associated which each "layer ID" from the conversion of the CCII data. It draws on Jocob's supplied shapefiles properties_per_grid_cell__. Jacob matched the shapefile TotalPrecip -  (which I created from the "Accessing ..." script) to the EQC database of properties to attached a number of properties observation to each grid's Layer ID. This file simply saves those with their coordinates also. It builds the outputs: LayerID_with_coordinates_full_grid and LayerID_with_coordinates_full_grid_w_num_properties
+=======
+"Extracting grid IDs" is excatly what the name suggests - identifying the coordinates associated which each "layer ID" from the conversion of the CCII data. It draws on Jocob's supplied shapefiles properties_per_grid_cell__. Jacob matched the shapefile TotalPrecip -  (which I created from the "Accessing ..." script) to the EQC database of properties to attached a number of properties observation to each grid's Layer ID. This file simply saves those with their coordinates also. It builds the outputs: LayerID_with_coordinates_full_grid and LayerID_with_coordinates_full_grid_w_num_properties
+>>>>>>> 2cde26f4bcfe9822e484a00e0c9c4b7722c3638d
 
 
 
