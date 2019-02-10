@@ -1,5 +1,7 @@
 # Data processing and histogram of rain within claim's lossdate window 
 
+setwd("~/insurance-and-climate/Scripts")
+
 ## Using sf package:
 
 #0 - for new machines (installing packages) 
