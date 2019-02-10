@@ -1,6 +1,6 @@
 
 
-setwd("~/insurance-and-climate/Scripts")
+setwd("~/insurance-and-climate")
 
 ## Using sf package:
 
