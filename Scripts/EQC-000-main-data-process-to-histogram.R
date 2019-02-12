@@ -7,7 +7,8 @@ setwd("~/insurance-and-climate")
 #0 - for new machines (installing packages) 
 #source("EQC-0.R")
 
-# - add the Data to a folder called Data in the project. #NB note data names etc. 
+# - add the raw data files to the folder called Data in the project. 
+#NB note data names etc. 
 
 # Data processing and histogram of rain within claim's lossdate window 
 

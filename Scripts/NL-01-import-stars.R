@@ -12,7 +12,7 @@ library(raster)
 ## open night-time light TIFs individually as stars, and crop these to the NZ property extent 
 
 ## create sf object of boundary box around portfolios in NZ 
-source("Scripts/EQC-02-portfolio-import.R") # if haven't already loaded eqc property data 
+#source("Scripts/EQC-02-portfolio-import.R") # if haven't already loaded eqc property data 
 nzboundary <- st_bbox(portfolios)
 
 # read in and crop first three layers, with eyeball checks: 
