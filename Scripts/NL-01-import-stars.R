@@ -1,5 +1,8 @@
 ### Note: to use this file first download data using "NL-00-test-nightlight-import.R" or [insert name of terminal code to download all NOAA tifs here]
 
+## To install stars package:
+#devtools::install_github("r-spatial/stars")
+
 # Working with NOAA/NASA nighttime light TIFs 
 library(stars)
 library(dplyr)
