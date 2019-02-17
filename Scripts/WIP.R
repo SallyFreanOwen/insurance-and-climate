@@ -19,12 +19,13 @@ claimPortfolioSpatial <- mutate(claimPortfolioSpatial, eventMonth=month(eventDat
 claimPortfolioSpatial <- mutate(claimPortfolioSpatial, eventYear=year(eventDate))
 
 # Recreating histograms from first paper 
+# (Note to self needs major tidying up!) 
 hist(claimPortfolioSpatial$eventYear)
 hist(claimPortfolioSpatial$eventMonth)
 
 #Subsetting for speed while working out process:
 claimPortfolioSpatialTestSub <- filter(claimPortfolioSpatial, eventYear == 2012)
-vcsnTestSub <- filter(vcsn, vcsn$vcsnDay > "2011-12-31", vcsn$vcsnDay < "2012-12-31")
+vcsnTestSub <- filter(vcsn, vcsn$vcsnDay > "2011-12-31", vcsn$vcsnDay < "2013-01-01")
 
 claimPortfolioSpatialTestVCSN <- merge(claimPortfolioSpatialTestSub, vcsnTestSub, by = c("vcsnLongitude", "vcsnLatitude"))
 
