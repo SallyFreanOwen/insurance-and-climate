@@ -16,5 +16,5 @@ portfolioNLSpatial_subset <- dplyr::select(portfolioNLSpatial,
 
 
 # Add NL to portfolio info 
-portfolioNL <- merge(x = portfolioNLSpatial_subset, y = nl_combined_sf$attr, by = c("nlLongitude", "nlLatitude"))
+claimPortfolioSpatialTestVCSN <- merge(x = claimPortfolioSpatialTestVCSN, y = spatial, by = portfolioID)
 
