@@ -1,8 +1,11 @@
-# Having another go at extracting the  NIWA data in a way that captures the metadata...
+# Extracting NIWA netcdf data into csv form for Jacob in a way that captures the metadata...
 # December 2017 
 # Sally Owen 
 
-#Reading in the data/saving as useful csvs - a function that takes a filenames, and spits out the csvs we want (a tableof grid lat then long then all the observations associated with each ... 
+### Writing a new function: openandsave() 
+# Reading in the data/saving as csvs:
+# a function that takes a filenames, and spits out a table of 
+# lat then long then all the observations associated with each ... 
 
 openandsave <- function(ncname) {
   
@@ -14,9 +17,6 @@ openandsave <- function(ncname) {
   # Setting working directory 
   # setwd("R:/Agriculture/Deep_South_Challenge_2017/5 Raw Data/NIWA Climate observations")
   # If this isn't working (sometimes it doesn't - manually choose Session then Set working directory)
-  
-  
-  
   
   ncfname <- paste(ncname, ".nc", sep="")
   dname <- "precipitation_amount"  # note: rain means precipitation amount in kg m-2 - full description: "virtual climate station rainfall in mm/day from 9am to 9 am recorded against day of start of period 
@@ -65,7 +65,6 @@ openandsave <- function(ncname) {
   
   #Check you got them all (print current workspace):
   ls()
-  
   
   #Reshaping the data (with a bit of cleaning along the way) 
   # this piece first saving only one day against lat longs for each grid
@@ -118,7 +117,6 @@ openandsave <- function(ncname) {
   #csvfile <- paste(csvname, sep="")
   #write.table(na.omit(rain_df01),csvfile, row.names=FALSE, sep=",") 
   
-  
   # Convert the whole array to a data frame 
   # this piece saves the whole first year of data 
   ###### 
@@ -155,7 +153,6 @@ openandsave <- function(ncname) {
   #Check what's in the current workspace now:
   #ls()
   
-  
   # SOme extra notes
   ######
   # Other notes:
@@ -167,40 +164,43 @@ openandsave <- function(ncname) {
 
 
 # set path and filename
-ncname <- "VCSN_Rain5k_1999" 
+ncname <- "Data/VCSN_Rain5k_1999" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2000" 
+ncname <- "Data/VCSN_Rain5k_2000" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2001" 
+ncname <- "Data/VCSN_Rain5k_2001" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2002" 
+ncname <- "Data/VCSN_Rain5k_2002" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2003" 
+ncname <- "Data/VCSN_Rain5k_2003" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2004" 
+ncname <- "Data/VCSN_Rain5k_2004" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2005" 
+ncname <- "Data/VCSN_Rain5k_2005" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2006" 
+ncname <- "Data/VCSN_Rain5k_2006" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2007" 
+ncname <- "Data/VCSN_Rain5k_2007" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2008" 
+ncname <- "Data/VCSN_Rain5k_2008" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2009" 
+ncname <- "Data/VCSN_Rain5k_2009" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2010" 
+ncname <- "Data/VCSN_Rain5k_2010" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2011" 
+ncname <- "Data/VCSN_Rain5k_2011" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2012" 
+ncname <- "Data/VCSN_Rain5k_2012" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2013" 
+ncname <- "Data/VCSN_Rain5k_2013" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2014"
+ncname <- "Data/VCSN_Rain5k_2014"
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2015" 
+ncname <- "Data/VCSN_Rain5k_2015" 
 openandsave(ncname)
-ncname <- "VCSN_Rain5k_2016" 
+ncname <- "Data/VCSN_Rain5k_2016" 
 openandsave(ncname)
-
+ncname <- "Data/VCSN_Rain5k_2017" 
+openandsave(ncname)
+ncname <- "Data/VCSN_Rain5k_2018" 
+openandsave(ncname)

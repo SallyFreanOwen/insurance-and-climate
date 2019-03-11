@@ -8,12 +8,14 @@ openandsave <- function(ncname) {
   library(ncdf4)
   
   ncfname <- paste(ncname, ".nc", sep="")
-  dname <- "precipitation_amount"  # note: rain means precipitation amount in kg m-2 - full description: "virtual climate station rainfall in mm/day from 9am to 9 am recorded against day of start of period 
+  dname <- "precipitation_amount"  
+  # note: rain = precipitation amount in kg m-2 - 
+  # or full description: "virtual climate station rainfall in mm/day from 9am to 9 am recorded against day of start of period"
   
   ncin <- nc_open(ncfname)
   print(ncin)
   
-  # These files are raster "bricks" organised by longitude,latitude,time
+  # These files are raster "bricks" organised by longitude, latitude, time
   # So, first we read in the metadata for each of those dimensions 
   
   ## get longitude and latitude
@@ -141,6 +143,10 @@ ncname <- "Data/VCSN_Rain5k_2015"
 openandsave(ncname)
 ncname <- "Data/VCSN_Rain5k_2016" 
 openandsave(ncname)
+ncname <- "Data/VCSN_Rain5k_2017" 
+openandsave(ncname)
+ncname <- "Data/VCSN_Rain5k_2018" 
+openandsave(ncname)
 
 ######
 
@@ -165,6 +171,8 @@ VCSN_Rain5k_2013 <- read.csv("Data/VCSN_Rain5k_2013.csv", stringsAsFactors = FAL
 VCSN_Rain5k_2014 <- read.csv("Data/VCSN_Rain5k_2014.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2015 <- read.csv("Data/VCSN_Rain5k_2015.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2016 <- read.csv("Data/VCSN_Rain5k_2016.csv", stringsAsFactors = FALSE)
+VCSN_Rain5k_2017 <- read.csv("Data/VCSN_Rain5k_2017.csv", stringsAsFactors = FALSE)
+VCSN_Rain5k_2018 <- read.csv("Data/VCSN_Rain5k_2018.csv", stringsAsFactors = FALSE)
 
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_1999, VCSN_Rain5k_2000, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2001, by=c("lon", "lat"))
@@ -183,9 +191,11 @@ VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2013, by=c("lon", 
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2014, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2015, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2016, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2017, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2018, by=c("lon", "lat"))
 
 # write out the dataframe as a .csv file
-csvfile <- paste("Data/VCSN_Rain5k_1999_2016", ".csv", sep="")
+csvfile <- paste("Data/VCSN_Rain5k_1999_2018", ".csv", sep="")
 write.table(VCSN_Rain5k_working, csvfile, row.names=FALSE, sep=",")
 
 # clean up workspace:
@@ -207,7 +217,8 @@ rm(VCSN_Rain5k_2013)
 rm(VCSN_Rain5k_2014)
 rm(VCSN_Rain5k_2015)
 rm(VCSN_Rain5k_2016)
-rm(VCSN_Rain5k_working)
+rm(VCSN_Rain5k_2017)
+rm(VCSN_Rain5k_2018)
 
 # setwd("~/EQC-climate-change-part-two")
 
@@ -217,7 +228,7 @@ library(sf)
 # Inputting:
 
 # Attempt at full set: note this won't compile to claims for the whole country (uses all 30GB)
-precip_table <- read.csv("Data/VCSN_Rain5k_1999_2016.csv", sep=",", stringsAsFactors = FALSE)
+precip_table <- read.csv("Data/VCSN_Rain5k_1999_2018.csv", sep=",", stringsAsFactors = FALSE)
 head(names(precip_table))
 names(precip_table) <- gsub("X", "precip", names(precip_table))
 head(names(precip_table))
@@ -252,7 +263,7 @@ names(vcsn) <- c("vcsnLongitude", "vcsnLatitude", "vcsnDay", "rain")
 vcsnWide <- dcast(vcsn, vcsnLatitude + vcsnLongitude ~ vcsnDay, value.var="rain")
 vcsnWide$long <- vcsnWide$vcsnLongitude
 vcsnWide$lat <- vcsnWide$vcsnLatitude
-vcsnWide <- st_as_sf(vcsnWide, coords = c("long", "lat"), crs = 4326) #note crs tells it the latlons are wgs84
+vcsnWide <- st_as_sf(vcsnWide, coords = c("long", "lat"), crs = 4326) #note crs code let's the function know the latlons are wgs84
 
 #vcsnWorking <- melt(vcsnWide, id=c("vcsnLatitude", "vcsnLongitude"))
 
