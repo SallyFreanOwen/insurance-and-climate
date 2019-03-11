@@ -14,13 +14,13 @@ aMAP<-leaflet() %>% #width = "100%", height="100%"
              completedColor = "#7D4479") %>%
   
   # all CA gages
-  addCircleMarkers(data=claimSP, group="Portfolios - claimed sample",
+  addCircleMarkers(data=portfolios, group="Portfolios - full sample",
                    stroke=TRUE, weight=0.3, radius=2,
                    fillOpacity = 0.7,
                    fillColor = "orange") %>%
   
   # add samples
-  addCircleMarkers(data=precipOneDay, group="Rain on first day",
+  addCircleMarkers(data=vcsnWide, group="Rain data",
                    opacity = 0.8, 
                    weight=0.6,
                    radius=1, 
