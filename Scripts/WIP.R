@@ -89,4 +89,9 @@ rm(inds)
 portfolioNLSF$nlLongitude <- st_coordinates(portfolioNLSF$nlPoint)[,1]
 portfolioNLSF$nlLatitude <- st_coordinates(portfolioNLSF$nlPoint)[,2]
 
+# Merge vcsn identifier information onto this
+claimPortfolioVcsnID <- data.frame(claimID=claimPortfolioSpatial$claimID, portfolioID=claimPortfolioSpatial$portfolioID, vcsnPoint =  claimPortfolioSpatial$vcsnPoint, vcsnLongitude = claimPortfolioSpatial$vcsnLongitude, vcsnLatitude = claimPortfolioSpatial$vcsnLatitude)
+portfolioNLSFVcsnID <- merge(portfolioNLSF, claimPortfolioVcsnID, by = c("portfolioID"))
+
+
 
