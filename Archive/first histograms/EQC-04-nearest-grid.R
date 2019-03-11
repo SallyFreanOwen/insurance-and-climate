@@ -25,4 +25,10 @@ tail(spatial)
 # Re-format neighbour link dataset from tibble to dataframe 
 spatial <- as.data.frame((spatial))
 
+# Splitting out the lat longs 
+spatial$vcsnLongitude <- st_coordinates(spatial$vcsnPoint)[,1]
+spatial$vcsnLatitude <- st_coordinates(spatial$vcsnPoint)[,2]
+
+portfolioVcsnID <- spatial
+
 rm(inds)

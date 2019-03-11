@@ -10,7 +10,7 @@ rm(claim0004, claim0508, claim0912, claim1316,
    claimPortfolioSpatial06,
    claimPortfolioSpatialVCS0004, claimPortfolioSpatialVCS0508, 
    claimPortfolioSpatialVCS0912, claimPortfolioSpatialVCS1316
-   )
+)
 
 # Quick eyeball, getting up to speed 
 summary(claimPortfolioSpatial)
@@ -90,8 +90,23 @@ portfolioNLSF$nlLongitude <- st_coordinates(portfolioNLSF$nlPoint)[,1]
 portfolioNLSF$nlLatitude <- st_coordinates(portfolioNLSF$nlPoint)[,2]
 
 # Merge vcsn identifier information onto this
-claimPortfolioVcsnID <- data.frame(claimID=claimPortfolioSpatial$claimID, portfolioID=claimPortfolioSpatial$portfolioID, vcsnPoint =  claimPortfolioSpatial$vcsnPoint, vcsnLongitude = claimPortfolioSpatial$vcsnLongitude, vcsnLatitude = claimPortfolioSpatial$vcsnLatitude)
-portfolioNLSFVcsnID <- merge(portfolioNLSF, claimPortfolioVcsnID, by = c("portfolioID"))
 
+#claimPortfolioVcsnID <- data.frame(claimID=claimPortfolioSpatial$claimID, portfolioID=claimPortfolioSpatial$portfolioID, vcsnPoint =  claimPortfolioSpatial$vcsnPoint, vcsnLongitude = claimPortfolioSpatial$vcsnLongitude, vcsnLatitude = claimPortfolioSpatial$vcsnLatitude)
+#portfolioNLSFVcsnID <- merge(portfolioNLSF, claimPortfolioVcsnID, by = c("portfolioID"))
 
+# From "EQC 04" script on building spatial link 
+# using output: portfolioVcsnID 
+portfolioNLVcsnID <- merge(portfolioNLSF, portfolioVcsnID, by = "portfolioID")
+
+# And merging cliam info on to that:
+claimPortfolioNLVcsnID <- merge(portfolioNLVcsnID, claims, by = "portfolioID", all = TRUE)
+
+# Building out the relevant precip information:
+
+# So that we don't attach ALL rain/NL info, first finding year/month pairs for each claim:
+#claimPortfolioNLVcsnID$eventMonth <- month(claimPortfolioNLVcsnID$eventDate)
+#claimPortfolioNLVcsnID$eventYear <- year(claimPortfolioNLVcsnID$eventDate)
+# line above took far too long to load 
+#claims$eventMonth <- month(claims$eventDate)
+#claims$eventMontht1 <- (claims$eventMonth) + 1
 
