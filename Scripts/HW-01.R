@@ -1,4 +1,4 @@
-# HW - 02 Initial investigation HWEC 
+# Import HW - Initial investigation HWEC 
 
 histWeatherRaw <- read.csv("Data/HistoricEventsCatalog.csv", stringsAsFactors = FALSE)
 
