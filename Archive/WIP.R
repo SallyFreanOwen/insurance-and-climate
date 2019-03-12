@@ -19,14 +19,15 @@ claimPortfolioSpatial <- mutate(claimPortfolioSpatial, eventMonth=month(eventDat
 claimPortfolioSpatial <- mutate(claimPortfolioSpatial, eventYear=year(eventDate))
 
 # Recreating histograms from first paper 
+# (Note to self needs major tidying up!) 
 hist(claimPortfolioSpatial$eventYear)
 hist(claimPortfolioSpatial$eventMonth)
 
 #Subsetting for speed while working out process:
-claimPortfolioSpatialTestSub <- filter(claimPortfolioSpatial, eventYear == 2012)
-vcsnTestSub <- filter(vcsn, vcsn$vcsnDay > "2011-12-31", vcsn$vcsnDay < "2012-12-31")
+claimPortfolioVCSNSpatialSub2012 <- filter(claimPortfolioSpatial, eventYear == 2012)
+vcsnSub2012 <- filter(vcsn, vcsn$vcsnDay > "2011-12-31", vcsn$vcsnDay < "2013-01-01")
 
-claimPortfolioSpatialTestVCSN <- merge(claimPortfolioSpatialTestSub, vcsnTestSub, by = c("vcsnLongitude", "vcsnLatitude"))
+claimPortfolioRain2012 <- merge(claimPortfolioVCSNSpatialSub2012, vcsnSub2012, by = c("vcsnLongitude", "vcsnLatitude"))
 
 # Great! working, now...
 
@@ -36,6 +37,7 @@ library(stars)
 library(dplyr)
 library(sf)
 library(raster)
+
 ## create sf object of boundary box around portfolios in NZ
 #source("Scripts/EQC-02-portfolio-import.R") # if haven't already loaded eqc property data
 nzboundary <- st_bbox(portfolios)
@@ -55,8 +57,11 @@ dimnames(nl_combined)[3]<-"time"
 rm(nl201204, nl201205)
 
 # Link to property data ... 
+
+# first inspect the stats object: 
 nl_combined
 
+# load required packages:
 library(tidyverse);
 library(sf);
 library(rvest);
@@ -66,6 +71,7 @@ library(leaflet);
 library(htmltools);
 library(devtools)
 
+# convert to sf object 
 nl_combined_sf <- st_as_sfc(nl_combined, as_points=TRUE, na.rm=TRUE)
 
 ## Find indices of the nearest point in A to each of the points in B
@@ -81,14 +87,23 @@ head(spatial)
 tail(spatial)
 
 # Re-format neighbour link dataset from tibble to dataframe 
-portfolioNLSF <- as.data.frame((spatial))
+portfolioNLSpatialSF <- as.data.frame((spatial))
 
+#Tidying up workspace:
+rm(spatial)
+rm(claimPortfolioSpatialTestSub)
+rm(claimPortfolio)
+rm(portfolios)
+rm(claims)
+rm(tree)
+rm(vcsnTestSub)
 rm(inds)
 
 # Splitting out the lat longs 
-portfolioNLSF$nlLongitude <- st_coordinates(portfolioNLSF$nlPoint)[,1]
-portfolioNLSF$nlLatitude <- st_coordinates(portfolioNLSF$nlPoint)[,2]
+portfolioNLSpatialSF$nlLongitude <- st_coordinates(portfolioNLSpatialSF$nlPoint)[,1]
+portfolioNLSpatialSF$nlLatitude <- st_coordinates(portfolioNLSpatialSF$nlPoint)[,2]
 
+<<<<<<< HEAD
 # Merge vcsn identifier information onto this
 
 #claimPortfolioVcsnID <- data.frame(claimID=claimPortfolioSpatial$claimID, portfolioID=claimPortfolioSpatial$portfolioID, vcsnPoint =  claimPortfolioSpatial$vcsnPoint, vcsnLongitude = claimPortfolioSpatial$vcsnLongitude, vcsnLatitude = claimPortfolioSpatial$vcsnLatitude)
@@ -109,4 +124,11 @@ claimPortfolioNLVcsnID <- merge(portfolioNLVcsnID, claims, by = "portfolioID", a
 # line above took far too long to load 
 #claims$eventMonth <- month(claims$eventDate)
 #claims$eventMontht1 <- (claims$eventMonth) + 1
+=======
+#Re order for ease of reading:
+  
+portfolioNLSpatialSF <- select(portfolioNLSpatialSF, portfolioID, nlLongitude, nlLatitude)
+>>>>>>> 6e5512815e45738b7e099c5e57f5fe7e2a92dd16
 
+portfolioNLSpatialSF %>% 
+  select(portfolioID, nlLongitude, nlLatitude)

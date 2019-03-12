@@ -13,7 +13,7 @@ library(leaflet);
 library(htmltools);
 library(devtools)
 
-test <- st_as_sfc(nl_combined, as_points=TRUE, na.rm=TRUE)
+test <- st_as_sfc(nl201204, as_points=TRUE, na.rm=TRUE)
 
 ## Find indices of the nearest point in A to each of the points in B
 tree <- createTree(st_coordinates(test)) #A=nl
