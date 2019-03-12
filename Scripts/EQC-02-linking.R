@@ -45,7 +45,7 @@ claimPortfolioSpatial$vcsnLongitude <- st_coordinates(claimPortfolioSpatial$vcsn
 claimPortfolioSpatial$vcsnLatitude <- st_coordinates(claimPortfolioSpatial$vcsnPoint)[,2]
 
 # Subsetting - only the columns I actually want... 
-claimPortfolioSpatial06 <- dplyr::select(claimPortfolioSpatial,
+claimPortfolioSpatial <- dplyr::select(claimPortfolioSpatial,
                                          claimID, 
                                          portfolioID, 
                                          lossDate, 
@@ -53,3 +53,4 @@ claimPortfolioSpatial06 <- dplyr::select(claimPortfolioSpatial,
                                          portfolioLongitude, 
                                          vcsnLatitude, 
                                          vcsnLongitude)
+

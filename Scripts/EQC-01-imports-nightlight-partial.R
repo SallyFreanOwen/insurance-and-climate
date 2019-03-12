@@ -33,7 +33,7 @@ nl201204 ####  should return:
 ## ideally we want time as a third dimension 
 
 ## NB: at work computer I need to add the below before combined will work:
-memory.limit(100000)
+#memory.limit(100000)
 
 ## stars can combine the tifs and create a third using their filenames as the new dimension values:
 nl_combined <- c(c(nl201204,nl201205))

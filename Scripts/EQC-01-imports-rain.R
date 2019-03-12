@@ -260,6 +260,7 @@ rm(ncname)
 vcsn <- precipWorking 
 names(vcsn) <- c("vcsnLongitude", "vcsnLatitude", "vcsnDay", "rain")
 
+# Building a "wide" version of precip, for use in the grid linking "tree" 
 vcsnWide <- dcast(vcsn, vcsnLatitude + vcsnLongitude ~ vcsnDay, value.var="rain")
 vcsnWide$long <- vcsnWide$vcsnLongitude
 vcsnWide$lat <- vcsnWide$vcsnLatitude
@@ -268,6 +269,8 @@ vcsnWide <- st_as_sf(vcsnWide, coords = c("long", "lat"), crs = 4326) #note crs 
 #vcsnWorking <- melt(vcsnWide, id=c("vcsnLatitude", "vcsnLongitude"))
 
 rm(precipWorking)
+
+library(lubridate) 
 
 vcsn$eventMonth <- month(vcsn$vcsnDay)
 vcsn$eventYear <- year(vcsn$vcsnDay)
