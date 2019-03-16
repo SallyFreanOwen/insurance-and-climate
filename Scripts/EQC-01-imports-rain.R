@@ -107,28 +107,28 @@ openandsave <- function(ncname) {
 }
 
 # set path and filename
-ncname <- "Data/VCSN_Rain5k_1999" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2000" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2001" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2002" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2003" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2004" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2005" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2006" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2007" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2008" 
-openandsave(ncname)
-ncname <- "Data/VCSN_Rain5k_2009" 
-openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_1999" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2000" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2001" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2002" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2003" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2004" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2005" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2006" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2007" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2008" 
+#openandsave(ncname)
+#ncname <- "Data/VCSN_Rain5k_2009" 
+#openandsave(ncname)
 ncname <- "Data/VCSN_Rain5k_2010" 
 openandsave(ncname)
 ncname <- "Data/VCSN_Rain5k_2011" 
@@ -153,19 +153,19 @@ openandsave(ncname)
 # Now adding them all together: 
 
 # read in new data as R object
-VCSN_Rain5k_1999 <- read.csv("Data/VCSN_Rain5k_1999.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2000 <- read.csv("Data/VCSN_Rain5k_2000.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2001 <- read.csv("Data/VCSN_Rain5k_2001.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2002 <- read.csv("Data/VCSN_Rain5k_2002.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2003 <- read.csv("Data/VCSN_Rain5k_2003.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2004 <- read.csv("Data/VCSN_Rain5k_2004.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2005 <- read.csv("Data/VCSN_Rain5k_2005.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2006 <- read.csv("Data/VCSN_Rain5k_2006.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2007 <- read.csv("Data/VCSN_Rain5k_2007.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2008 <- read.csv("Data/VCSN_Rain5k_2008.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2009 <- read.csv("Data/VCSN_Rain5k_2009.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2010 <- read.csv("Data/VCSN_Rain5k_2010.csv", stringsAsFactors = FALSE)
-VCSN_Rain5k_2011 <- read.csv("Data/VCSN_Rain5k_2011.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_1999 <- read.csv("Data/VCSN_Rain5k_1999.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2000 <- read.csv("Data/VCSN_Rain5k_2000.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2001 <- read.csv("Data/VCSN_Rain5k_2001.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2002 <- read.csv("Data/VCSN_Rain5k_2002.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2003 <- read.csv("Data/VCSN_Rain5k_2003.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2004 <- read.csv("Data/VCSN_Rain5k_2004.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2005 <- read.csv("Data/VCSN_Rain5k_2005.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2006 <- read.csv("Data/VCSN_Rain5k_2006.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2007 <- read.csv("Data/VCSN_Rain5k_2007.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2008 <- read.csv("Data/VCSN_Rain5k_2008.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2009 <- read.csv("Data/VCSN_Rain5k_2009.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2010 <- read.csv("Data/VCSN_Rain5k_2010.csv", stringsAsFactors = FALSE)
+#VCSN_Rain5k_2011 <- read.csv("Data/VCSN_Rain5k_2011.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2012 <- read.csv("Data/VCSN_Rain5k_2012.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2013 <- read.csv("Data/VCSN_Rain5k_2013.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2014 <- read.csv("Data/VCSN_Rain5k_2014.csv", stringsAsFactors = FALSE)
@@ -174,19 +174,19 @@ VCSN_Rain5k_2016 <- read.csv("Data/VCSN_Rain5k_2016.csv", stringsAsFactors = FAL
 VCSN_Rain5k_2017 <- read.csv("Data/VCSN_Rain5k_2017.csv", stringsAsFactors = FALSE)
 VCSN_Rain5k_2018 <- read.csv("Data/VCSN_Rain5k_2018.csv", stringsAsFactors = FALSE)
 
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_1999, VCSN_Rain5k_2000, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2001, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2002, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2003, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2004, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2005, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2006, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2007, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2008, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2009, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2010, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2011, by=c("lon", "lat"))
-VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2012, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_1999, VCSN_Rain5k_2000, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2001, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2002, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2003, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2004, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2005, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2006, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2007, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2008, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2009, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2010, by=c("lon", "lat"))
+#VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2011, by=c("lon", "lat"))
+VCSN_Rain5k_working <- merge(VCSN_Rain5k_2011, VCSN_Rain5k_2012, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2013, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2014, by=c("lon", "lat"))
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2015, by=c("lon", "lat"))
@@ -195,22 +195,23 @@ VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2017, by=c("lon", 
 VCSN_Rain5k_working <- merge(VCSN_Rain5k_working, VCSN_Rain5k_2018, by=c("lon", "lat"))
 
 # write out the dataframe as a .csv file
-csvfile <- paste("Data/VCSN_Rain5k_1999_2018", ".csv", sep="")
+#csvfile <- paste("Data/VCSN_Rain5k_1999_2018", ".csv", sep="")
+csvfile <- paste("Data/VCSN_Rain5k_2011_2018", ".csv", sep="")
 write.table(VCSN_Rain5k_working, csvfile, row.names=FALSE, sep=",")
 
 # clean up workspace:
-rm(VCSN_Rain5k_1999)
-rm(VCSN_Rain5k_2000)
-rm(VCSN_Rain5k_2001)
-rm(VCSN_Rain5k_2002)
-rm(VCSN_Rain5k_2003)
-rm(VCSN_Rain5k_2004)
-rm(VCSN_Rain5k_2005)
-rm(VCSN_Rain5k_2006)
-rm(VCSN_Rain5k_2007)
-rm(VCSN_Rain5k_2008)
-rm(VCSN_Rain5k_2009)
-rm(VCSN_Rain5k_2010)
+#rm(VCSN_Rain5k_1999)
+#rm(VCSN_Rain5k_2000)
+#rm(VCSN_Rain5k_2001)
+#rm(VCSN_Rain5k_2002)
+#rm(VCSN_Rain5k_2003)
+#rm(VCSN_Rain5k_2004)
+#rm(VCSN_Rain5k_2005)
+#rm(VCSN_Rain5k_2006)
+#rm(VCSN_Rain5k_2007)
+#rm(VCSN_Rain5k_2008)
+#rm(VCSN_Rain5k_2009)
+#rm(VCSN_Rain5k_2010)
 rm(VCSN_Rain5k_2011)
 rm(VCSN_Rain5k_2012)
 rm(VCSN_Rain5k_2013)
@@ -228,7 +229,8 @@ library(sf)
 # Inputting:
 
 # Attempt at full set: note this won't compile to claims for the whole country (uses all 30GB)
-precip_table <- read.csv("Data/VCSN_Rain5k_1999_2018.csv", sep=",", stringsAsFactors = FALSE)
+#precip_table <- read.csv("Data/VCSN_Rain5k_1999_2018.csv", sep=",", stringsAsFactors = FALSE)
+precip_table <- read.csv("Data/VCSN_Rain5k_2011_2018.csv", sep=",", stringsAsFactors = FALSE)
 head(names(precip_table))
 names(precip_table) <- gsub("X", "precip", names(precip_table))
 head(names(precip_table))
