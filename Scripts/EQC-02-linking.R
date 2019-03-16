@@ -1,4 +1,4 @@
-# EQC 4 build spatial link between grids and portfolios 
+# THis file builds the spatial link between grids and portfolios 
 
 library(tidyverse);
 library(sf);
@@ -33,12 +33,12 @@ portfolioVcsnID <- spatial
 
 rm(inds)
 
-#EQC 5 build claim portfolio spatial 
+# Build claim portfolio spatial 
 
 claimPortfolio <- merge(claims, portfolios, by = "portfolioID") 
 claimPortfolioSpatial <- merge(claimPortfolio, spatial, by = "portfolioID")
 
-# EQC 6 - add rain data 
+# Add rain data 
 
 # Splitting out the lat longs 
 claimPortfolioSpatial$vcsnLongitude <- st_coordinates(claimPortfolioSpatial$vcsnPoint)[,1]

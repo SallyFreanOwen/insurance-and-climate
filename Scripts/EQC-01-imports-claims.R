@@ -69,8 +69,3 @@ rm(claimRaw)
 rm(first.letter)
 rm(other.letters)
 rm(newnames)
-
-
-
-
-

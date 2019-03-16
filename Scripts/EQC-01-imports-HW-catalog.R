@@ -21,4 +21,7 @@ histWeather$identifier <- as.numeric(histWeather$identifier)
 histWeather$startDate <- as.Date(histWeather$startDate, format = "%Y-%m-%d")
 
 rm(histWeatherRaw)
+rm(first.letter)
+rm(newnames)
+rm(other.letters)
 

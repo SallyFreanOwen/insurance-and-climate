@@ -29,8 +29,6 @@ vcsnSub2012 <- filter(vcsn, vcsn$vcsnDay > "2011-12-31", vcsn$vcsnDay < "2013-01
 
 claimPortfolioRain2012 <- merge(claimPortfolioVCSNSpatialSub2012, vcsnSub2012, by = c("vcsnLongitude", "vcsnLatitude"))
 
-# Great! working, now...
-
 #working with NOAA/NASA nighttime light TIFs
 
 library(stars)
