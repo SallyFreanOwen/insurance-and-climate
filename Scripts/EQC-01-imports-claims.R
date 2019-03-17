@@ -7,6 +7,8 @@ rm(list=ls())
 #setwd("~/EQC-climate-change-part-two")
 
 library(sf) 
+library(lubridate)
+
 # note sf is designed to supercede package(sp) 
 # it's more dataframe-based, with or w/o geospatial elements - a better fit for this project 
 library(tidyverse)

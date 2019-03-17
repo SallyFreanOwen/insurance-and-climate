@@ -54,8 +54,8 @@ claimPortfolioVcsnID$claimed <- ifelse(claimPortfolioVcsnID$claimID=="NA", 0, 1)
 
 ### Third, from the claim-precip link, attaching relevant rainfall... 
 claimPortfolioVcsnID$eventMonth <- month(claimPortfolioVcsnID$lossDate)
-claimPortfolioVcsnID$eventPreMonth <- c(claimPortfolioVcsnID$eventMonth-1)
-claimPortfolioVcsnID$eventPostMonth <- c(claimPortfolioVcsnID$eventMonth+1)
+#claimPortfolioVcsnID$eventPreMonth <- c(claimPortfolioVcsnID$eventMonth-1)
+#claimPortfolioVcsnID$eventPostMonth <- c(claimPortfolioVcsnID$eventMonth+1)
 # Note to self: fix the January/December link here! 
 claimPortfolioVcsnID$eventYear <- year(claimPortfolioVcsnID$lossDate)
 claimPortfolioVcsnID$vcsnDay <- claimPortfolioVcsnID$lossDate
