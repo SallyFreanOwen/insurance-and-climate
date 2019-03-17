@@ -57,21 +57,15 @@ claimPortfolioVcsnID$eventPreMonth <- c(claimPortfolioVcsnID$eventMonth-1)
 claimPortfolioVcsnID$eventPostMonth <- c(claimPortfolioVcsnID$eventMonth+1)
 # Note to self: fix the January/December link here! 
 claimPortfolioVcsnID$eventYear <- year(claimPortfolioVcsnID$lossDate)
-
 claimPortfolioVcsnID$vcsnDay <- claimPortfolioVcsnID$lossDate
-
 claimPortfolioVcsn <- merge(claimPortfolioVcsnID, vcsn, by = c("vcsnDay", "vcsnLatitude", "vcsnLongitude"))
-
-claimPortfolioVcsn <- claimPortfolioVcsn[1:-1]
-stat.desc(claimPortfolioVcsn[,sapply(claimPortfolioVcsn,is.numeric)], basic=F)
-
+#claimPortfolioVcsn <- claimPortfolioVcsn[1:-1]
 claimPortfolioVcsnFull <- merge(claimPortfolioVcsnID, claimPortfolioVcsn, by = "claimID", all.x = TRUE)
-
-
+stat.desc(claimPortfolioVcsnFull[,sapply(claimPortfolioVcsnFull,is.numeric)], basic=F)
 
 #claimPortfolioVcsn <- merge(claimPortfolioVcsnID, vcsn, by = c("vcsnDay", "vcsnLatitude", "vcsnLongitude", all.x = TRUE))
 
-### Second, NL to portfolios link 
+### Third, NL to portfolios link 
 nl201204sf <- st_as_sfc(nl201204, as_points=TRUE, na.rm=TRUE)
 
 ## Find indices of the nearest point in A to each of the points in B
@@ -87,16 +81,17 @@ head(spatial)
 tail(spatial)
 
 # Re-format neighbour link dataset from tibble to dataframe 
-spatial <- as.data.frame((spatial))
+spatial[1:2] <- as.data.frame((spatial)) #dropping portfolioPoint (unnecessary now)
 
-rm(inds)
-
-#NL 3 build portfolio spatial 
-
-portfolioNLSpatial <- merge(portfolios, spatial, by = "portfolioID")
+# merge onto portfolio data
+portfolioVcsnNlID <- merge(portfolioVcsnID, spatial, by = "portfolioID")
 
 # Splitting out the lat longs 
-portfolioNLSpatial$nlLongitude <- st_coordinates(portfolioNLSpatial$nlPoint)[,1]
-portfolioNLSpatial$nlLatitude <- st_coordinates(portfolioNLSpatial$nlPoint)[,2]
+portfolioVcsnNlID$nlLongitude <- st_coordinates(portfolioVcsnNlID$nlPoint)[,1]
+portfolioVcsnNlID$nlLatitude <- st_coordinates(portfolioVcsnNlID$nlPoint)[,2]
 
+head(portfolioVcsnNlID)
 
+rm(inds)
+rm(tree)
+rm(spatial)
