@@ -13,6 +13,7 @@ library(htmltools);
 library(SearchTrees)
 library(devtools)
 
+
 ### First, the precip link:
 
 # Finding indices of the two nearest points in A(rain) to each of the points in B(portfolios)
@@ -65,6 +66,19 @@ stat.desc(claimPortfolioVcsnFull[,sapply(claimPortfolioVcsnFull,is.numeric)], ba
 
 #claimPortfolioVcsn <- merge(claimPortfolioVcsnID, vcsn, by = c("vcsnDay", "vcsnLatitude", "vcsnLongitude", all.x = TRUE))
 
+#### Third: meshblock links 
+portfolios_sf <- st_geometry(portfolios)
+
+portfolios_wgs84 <- st_transform(st_geometry(portfolios), crs = 4326)
+meshblocks_wgs84 <- st_transform(st_geometry(meshblockImportRaw), crs = 4326)
+
+st_crs(portfolios_wgs84)
+st_crs(meshblocks_wgs84)
+
+portfolioMbID <- st_intersects(portfolios_wgs84, meshblocks_wgs84)
+
+
+
 ### Third, NL to portfolios link 
 nl201204sf <- st_as_sfc(nl201204, as_points=TRUE, na.rm=TRUE)
 
@@ -95,3 +109,5 @@ head(portfolioVcsnNlID)
 rm(inds)
 rm(tree)
 rm(spatial)
+
+
