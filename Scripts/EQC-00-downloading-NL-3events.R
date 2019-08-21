@@ -1,7 +1,6 @@
-### Downloading two test files via R 
+### Downloading three events/case study NL sets via R 
 
 # Note full set can be downloaded directly through the terminal - using url codes in the urls.txt file 
-# (very large - just using these two for WIP when working remotely)
 
 library(R.utils)
 
@@ -19,7 +18,7 @@ download.file(
 )
 
 download.file(
-  " https://data.ngdc.noaa.gov/instruments/remote-sensing/passive/spectrometers-radiometers/imaging/viirs/dnb_composites/v10//201507/vcmcfg/SVDNB_npp_20150701-20150731_00N060E_vcmcfg_v10_c201509151839.tgz",
+  "https://data.ngdc.noaa.gov/instruments/remote-sensing/passive/spectrometers-radiometers/imaging/viirs/dnb_composites/v10//201507/vcmcfg/SVDNB_npp_20150701-20150731_00N060E_vcmcfg_v10_c201509151839.tgz",
   destfile="Data/SVDNB_npp_20150701-20150731_00N060E_vcmcfg_v10_c201509151839.tgz"
 )
 
@@ -43,7 +42,6 @@ untar("Data/S201507.tar", exdir="Data")
 gunzip("Data/SVDNB_npp_20150801-20150831_00N060E_vcmcfg_v10_c201509301759.tgz",
        destname="Data/S201508.tar")
 untar("Data/S201508.tar", exdir="Data")
-
 
 ### Event 2: 
 

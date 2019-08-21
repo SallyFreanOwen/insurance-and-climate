@@ -21,3 +21,6 @@ st_crs(portfolios_wgs84)
 st_crs(auBoundaries2013)
 
 portfolioMbID <- st_join(st_buffer(portfolios_wgs84, dist = 5e4), auBoundaries2013)
+
+rm(shapefilename) 
+

@@ -1,14 +1,17 @@
 library(pastecs)
 options(digits=3)
 
-##############
+############## 
 
 portfolios <- portfolios[,c("portfolioID",
-                            "mLandValueWithin8m", "mDwellingValue",
+                            "mLandValueWithin8m", "mDwellingValue", "mDomesticContentsValue",
                             "slope", "distRiver", "distLake", "distCoast",
-                            "nlLongitude", "nlLatitude",
-                            "vcsnLongitude", "vcsnLatitude")
+                            "meanNumHHMembers", "medianHHIncome","propDwellingNotOwned",
+                            "nlLongitude.x", "nlLatitude.x",
+                            "vcsnLongitude.x", "vcsnLatitude.x")
                          ]
+
+names(portfolios)[12:15] <- c("nlLongitude", "nlLatitude", "vcsnLongitude", "vcsnLatitude")
 
 # Event 1 - 06/2015
 
@@ -22,24 +25,26 @@ claims201506 <- claims201506[,c("claimID","portfolioID",
                                 "buildingPaid","landPaid",
                                 "claimStatus",
                                 "buildingClaimCloseDate", "landClaimCloseDate",
-                                "eventMonth","eventYear")]
+                                "eventMonth","eventYear",
+                                "approved")]
 
 # generate # months to payment:
 claims201506$buildingTimeToPayment <- claims201506$buildingClaimCloseDate - claims201506$lossDate
+claims201506$landTimeToPayment <- claims201506$landClaimCloseDate - claims201506$lossDate
 
 claims201506 <- mutate(claims201506, claims201506$lossDate+1)
 claims201506 <- mutate(claims201506, claims201506$lossDate+2)
-names(claims201506)[12:13] <- c("lossDatePlusOne", "lossDatePlusTwo")
+names(claims201506)[15:16] <- c("lossDatePlusOne", "lossDatePlusTwo")
 
 portfoliosClaims15 <- merge(portfolios, claims201506, by = "portfolioID", all.x = TRUE)
 
 # attach to claimed upon properties:
 portfoliosClaimsVcsn15 <- merge(portfoliosClaims15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDate"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
-names(portfoliosClaimsVcsn15)[24] <- "rain1"
+names(portfoliosClaimsVcsn15)[27] <- "rain1"
 portfoliosClaimsVcsn15 <- merge(portfoliosClaimsVcsn15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDatePlusOne"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
-names(portfoliosClaimsVcsn15)[25] <- "rain2"
+names(portfoliosClaimsVcsn15)[28] <- "rain2"
 portfoliosClaimsVcsn15 <- merge(portfoliosClaimsVcsn15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDatePlusTwo"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
-names(portfoliosClaimsVcsn15)[26] <- "rain3"
+names(portfoliosClaimsVcsn15)[29] <- "rain3"
 
 # NL work... 
 
@@ -192,3 +197,7 @@ ggplot(data=vcsn201506) +
        y = "precipitation in mm/day",
        x = "date"
 )
+
+plot(st.as.sf(portfoliosClaimsVcsnNl1506precipOver100)
+
+plot()

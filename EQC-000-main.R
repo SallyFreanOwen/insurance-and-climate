@@ -45,9 +45,19 @@ source("Scripts/EQC-01-imports-rain.r")
 # Outputs: vcsn.Rdata and vcsnWide.Rdata
 
 #1d) NIGHT_TIME LIGHT
+#source("Scripts/EQC-00-downloading-NL-3events.r")
 source("Scripts/EQC-01-imports-nightlight-3events.r")
 # Inputs: full nl tifs for months around three major events 
 # Outputs: twelve stars objects named as "nlYYYYMM" saved as .rData 
+
+#1e) CENSUS DATA
+source("Scripts/EQC-01-imports-meshblock-data.r")
+# Inputs: StatsNZ 2013 HH census variables, EQC portfolios, 
+# Outputs: MBStats.r (portfolioIDs with mb level census data) 
+
+#1f) HISTORIC WEATHER CATALOG 
+#source("Scripts/EQC-00-parsing-HW-catalog.r")
+source("Scripts/EQC-01-imports-HW-catalog.r")
 
 ######################################
 

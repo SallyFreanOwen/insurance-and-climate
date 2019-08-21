@@ -5,6 +5,7 @@ library(SearchTrees);
 library(Imap);
 library(leaflet);
 library(htmltools);
+library(lubridate);
 library(SearchTrees)
 library(devtools)
 library(ggplot2)
@@ -98,7 +99,9 @@ portfolioNlID <- as.data.frame(portfolioNlID[2:4]) #dropping portfolioPoint (unn
 
 portfolios <- merge(portfolios, portfolioNlID, by = "portfolioID")
 portfolios <- merge(portfolios, portfolioVcsnID, by = "portfolioID")
+portfolios <- merge(portfolios, mbStats, by.x = "portfolioID", by.y = "portfolioid", all.x = TRUE)
 
 rm(portfolioNlID)
 rm(portfolioVcsnID)
+rm(mbStats)
 

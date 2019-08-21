@@ -2,7 +2,7 @@
 # EQC claims import  
 
 # Clear workspace before beginning:
-rm(list=ls())
+#rm(list=ls())
 
 #setwd("~/EQC-climate-change-part-two")
 
@@ -66,7 +66,9 @@ claims <- filter(claims, claims$portfolioID != "NULL")
 
 claims$eventMonth <- month(claims$eventDate)
 claims$eventYear <- year(claims$eventDate)
-                           
+
+claims$approved <- ifelse((claims$claimStatus=="Declined"),0,1)
+                          
 rm(claimRaw) 
 rm(first.letter)
 rm(other.letters)
