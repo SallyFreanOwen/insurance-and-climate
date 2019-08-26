@@ -1,5 +1,16 @@
 library(pastecs)
+library(stargazer)
 options(digits=3)
+
+# Tidy workspace (only require event data)
+
+rm(nl201611)
+rm(nl201612)
+rm(nl201701)
+
+rm(nl201703)
+rm(nl201704)
+rm(nl201705)
 
 ############## 
 
@@ -100,18 +111,22 @@ rm(portfoliosClaims15)
 
 # attach NL information to all properties 
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsn15, nl201505df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[35] <- "nl0"
+names(portfoliosClaimsVcsnNl15)[32] <- "nl0"
 
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsnNl15, nl201506df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[36] <- "nl1"
+names(portfoliosClaimsVcsnNl15)[33] <- "nl1"
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsnNl15, nl201507df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[37] <- "nl2"
+names(portfoliosClaimsVcsnNl15)[34] <- "nl2"
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsnNl15, nl201508df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[38] <- "nl3"
+names(portfoliosClaimsVcsnNl15)[35] <- "nl3"
 
 # check it is what you think it is...
 names(portfoliosClaimsVcsnNl15)
-#portfoliosClaimsVcsnNl15$claimed <- 0
+
+#Tidy workspace
+rm(portfoliosClaimsVcsn15)
+
+#create claimed
 portfoliosClaimsVcsnNl15$claimed <- ifelse(is.na(portfoliosClaimsVcsnNl15$claimID),0,1)
 
 # clear workspace 
@@ -120,41 +135,14 @@ rm(nl201506df)
 rm(nl201507df)
 rm(nl201508df)
 
-rm(nl201611)
-rm(nl201612)
-rm(nl201701)
-
-rm(nl201703)
-rm(nl201704)
-rm(nl201705)
-
-rm(nl201506df)
-rm(nl201507df)
-rm(nl201508df)
-
-rm(nl201611df)
-rm(nl201612df)
-rm(nl201701df)
-
-rm(nl201703df)
-rm(nl201704df)
-rm(nl201705df)
-
-rm(portfolioNlID)
-rm(portfolioVcsnID)
-rm(portfoliosClaims15)
-rm(portfoliosClaimsVcsn15)
-
-rm(vcsnWide)
-
 #stat.desc(portfoliosClaimsVcsnNl15[,sapply(portfoliosClaimsVcsnNl15,is.numeric)], basic=T)
 
 ### Build correct NL variables for analysis:
 portfoliosClaimsVcsnNl15 <- mutate(portfoliosClaimsVcsnNl15, nl3-nl1)
-names(portfoliosClaimsVcsnNl15)[40] <- c("nldif31")
+names(portfoliosClaimsVcsnNl15)[37] <- c("nldif31")
 
 portfoliosClaimsVcsnNl15 <- mutate(portfoliosClaimsVcsnNl15, nl1-nl0)
-names(portfoliosClaimsVcsnNl15)[41] <- c("nldif10")
+names(portfoliosClaimsVcsnNl15)[38] <- c("nldif10")
 
 #library(pastecs)
 #options(digits=3)
@@ -184,19 +172,20 @@ vcsn20150620 <- vcsn20150620[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 #vcsn20150622 <- vcsn20150622[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 
 portfoliosClaimsVcsnNl15AllPrecip0618 <- merge(portfoliosClaimsVcsnNl15, vcsn20150618, by = c("vcsnLongitude", "vcsnLatitude"))
-names(portfoliosClaimsVcsnNl15AllPrecip0618)[42] <- c("rain0618")
+names(portfoliosClaimsVcsnNl15AllPrecip0618)[39] <- c("rain0618")
 portfoliosClaimsVcsnNl15AllPrecip061819 <- merge(portfoliosClaimsVcsnNl15AllPrecip0618, vcsn20150619, by = c("vcsnLongitude", "vcsnLatitude"))
-names(portfoliosClaimsVcsnNl15AllPrecip061819)[43] <- c("rain0619")
+names(portfoliosClaimsVcsnNl15AllPrecip061819)[40] <- c("rain0619")
 portfoliosClaimsVcsnNl15AllPrecip06181920 <- merge(portfoliosClaimsVcsnNl15AllPrecip061819, vcsn20150620, by = c("vcsnLongitude", "vcsnLatitude"))
-names(portfoliosClaimsVcsnNl15AllPrecip06181920)[44] <- c("rain0620")
+names(portfoliosClaimsVcsnNl15AllPrecip06181920)[41] <- c("rain0620")
+
+rm(portfoliosClaimsVcsnNl15AllPrecip0618)
+rm(portfoliosClaimsVcsnNl15AllPrecip061819)
 
 # adjust "approved" variable to also be 0 for unclaimed properties:
 # first - has it got a claim at all? 
 portfoliosClaimsVcsnNl15AllPrecip06181920$approved <- replace_na(portfoliosClaimsVcsnNl15AllPrecip06181920$approved, 0)
 portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace_na(portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days, 0)
-portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace(portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days,portfoliosClaimsVcsnNl15AllPrecip06181920$approved==0, 0)
-
-test <- portfoliosClaimsVcsnNl15AllPrecip06181920[,c("claimID", "approved", "closedIn90Days", "claimed")]
+#portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace(portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days,portfoliosClaimsVcsnNl15AllPrecip06181920$approved==0, 0)
 
 # check it is what you think it is...
 #portfoliosClaimsVcsnNl15AllPrecip0620$correctLossDate <- 0
@@ -209,39 +198,55 @@ test <- portfoliosClaimsVcsnNl15AllPrecip06181920[,c("claimID", "approved", "clo
 portfoliosClaimsVcsnNl1506precipOver50 <- filter(portfoliosClaimsVcsnNl15AllPrecip06181920, rain0618 > 50 | rain0619 > 50 | rain0620 > 50 )
 portfoliosClaimsVcsnNl1506precipOver100 <- filter(portfoliosClaimsVcsnNl15AllPrecip06181920, rain0618 > 100 | rain0619 > 100 | rain0620 > 100 )
 
-
-
 linearMod1 <- lm(nldif31 ~ nldif10 + claimed + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
 summary(linearMod1)
 
 linearMod2 <- lm(nldif31 ~ nldif10 + approved + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
 summary(linearMod2)
 
-linearMod2 <- lm(nldif31 ~ nldif10 + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
-summary(linearMod2)
-
-linearMod3 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast + mDwellingValue + medianHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
+linearMod3 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
 summary(linearMod3)
 
-stargazer(linearMod1, linearMod2, linearMod3, title="Results - event one 50mm threshold")
-stargazer(portfoliosClaimsVcsnNl1506precipOver50)
-
-linearMod4 <- lm(nldif31 ~ nldif10 + claimed + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
+linearMod4 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast + medianHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
 summary(linearMod4)
 
-linearMod5 <- lm(nldif31 ~ nldif10 + approved + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
+stat.desc(portfoliosClaimsVcsnNl1506precipOver50)
+
+stargazer(linearMod1, linearMod2, linearMod3, linearMod4, title="Results - event one 50mm threshold")
+#stargazer(portfoliosClaimsVcsnNl1506precipOver50)
+
+
+linearMod5 <- lm(nldif31 ~ nldif10 + claimed + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
 summary(linearMod5)
 
 linearMod6 <- lm(nldif31 ~ nldif10 + approved + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
-summary(linearMod5)
+summary(linearMod6)
 
-stargazer(linearMod5, linearMod6, title = "Results - event one 100mm threshold")
-stargazer(portfoliosClaimsVcsnNl1506precipOver100)
+linearMod7 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
+summary(linearMod7)
 
-stargazer(linearMod1, linearMod2, linearMod3, linearMod4, linearMod5, linearMod6, title= "Event 1")
-stargazer(portfoliosClaimsVcsnNl15AllPrecip06181920, portfoliosClaimsVcsnNl1506precipOver50, portfoliosClaimsVcsnNl1506precipOver100)
+linearMod8 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast + medianHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
+summary(linearMod8)
 
-# to do: add map image of claimed upon properties 
+stat.desc(portfoliosClaimsVcsnNl1506precipOver100)
+
+stargazer(linearMod5, linearMod6, linearMod6, linearMod7,title = "Results - event one 100mm threshold")
+#stargazer(portfoliosClaimsVcsnNl1506precipOver100)
+
+stargazer(linearMod3, linearMod4, linearMod7, linearMod8, title= "Event 1")
+#stargazer(portfoliosClaimsVcsnNl15AllPrecip06181920, portfoliosClaimsVcsnNl1506precipOver50, portfoliosClaimsVcsnNl1506precipOver100)
+
+
+
+
+# to do: add map images of event data e.g. rain, claimed upon properties 
+portfoliosClaimsVcsnNl1506precipOver50points <- portfoliosClaimsVcsnNl1506precipOver50[,c("portfolioID","claimed","geometry")]
+plot(st.as.sf(portfoliosClaimsVcsnNl1506precipOver50points))
+portfoliosClaimsVcsnNl1506precipOver100points <- portfoliosClaimsVcsnNl1506precipOver100[,c("portfolioID","claimed","geometry")]
+plot(st.as.sf(portfoliosClaimsVcsnNl1506precipOver100points))
+
+
+#Plot precip total:
 ggplot(data=vcsn201506) +
   geom_point(vcsn201506, 
              mapping = aes(
@@ -252,7 +257,14 @@ ggplot(data=vcsn201506) +
        y = "precipitation in mm/day",
        x = "date"
 )
+ggsave("event1plot.png", width = 5, height = 5) 
 
-plot(st.as.sf(portfoliosClaimsVcsnNl1506precipOver100)
 
-plot()
+
+a <- ggplot(data = portfoliosClaimsVcsnNl15AllPrecip06181920,
+            mapping = aes(rain0618, claimed))
+
+  labs(title = "Event One - 2015-06", 
+       y = "precipitation in mm/day",
+       x = "date"
+  )
