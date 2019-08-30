@@ -187,48 +187,52 @@ portfoliosClaimsVcsnNl17AllPrecip03070809$closedIn90days <- replace_na(portfolio
 portfoliosClaimsVcsnNl1703precipOver50 <- filter(portfoliosClaimsVcsnNl17AllPrecip03070809, rain0307 > 50 | rain0308 > 50 | rain0309 > 50 )
 portfoliosClaimsVcsnNl1703precipOver100 <- filter(portfoliosClaimsVcsnNl17AllPrecip03070809, rain0307 > 100 | rain0308 > 100 | rain0309 > 100 )
 
-stat.desc(portfoliosClaimsVcsnNl1703precipOver50)
-stat.desc(portfoliosClaimsVcsnNl1703precipOver100)
 
-linearMod1 <- lm(nldif31 ~ nldif10 + claimed + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
+portfoliosClaimsVcsnNl1703precipOver50$medHHIncome <- portfoliosClaimsVcsnNl1703precipOver50$medianHHIncome/1000
+portfoliosClaimsVcsnNl1703precipOver100$medHHIncome <- portfoliosClaimsVcsnNl1703precipOver100$medianHHIncome/1000
+
+portfoliosClaimsVcsnNl1703precipOver50$dRiver <- portfoliosClaimsVcsnNl1703precipOver50$distRiver/1000
+portfoliosClaimsVcsnNl1703precipOver50$dCoast <- portfoliosClaimsVcsnNl1703precipOver50$distCoast/1000
+portfoliosClaimsVcsnNl1703precipOver50$dLake <- portfoliosClaimsVcsnNl1703precipOver50$distLake/1000
+portfoliosClaimsVcsnNl1703precipOver100$dRiver <- portfoliosClaimsVcsnNl1703precipOver100$distRiver/1000
+portfoliosClaimsVcsnNl1703precipOver100$dCoast <- portfoliosClaimsVcsnNl1703precipOver100$distCoast/1000
+portfoliosClaimsVcsnNl1703precipOver100$dLake <- portfoliosClaimsVcsnNl1703precipOver100$distLake/1000
+
+##
+
+linearMod1 <- lm(nldif31 ~ nldif10 + claimed + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
 summary(linearMod1)
 
-linearMod2 <- lm(nldif31 ~ nldif10 + approved + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
+linearMod2 <- lm(nldif31 ~ nldif10 + approved + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
 summary(linearMod2)
 
-linearMod3 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
+linearMod3 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
 summary(linearMod3)
 
-linearMod4 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast + medianHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver50)  # build linear regression model on full data
-summary(linearMod4)
+#linearMod4 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
+#summary(linearMod4)
 
-stat.desc(portfoliosClaimsVcsnNl1611precipOver50)
+######
 
-stargazer(linearMod1, linearMod2, linearMod3, linearMod4, title="Results - event two 50mm threshold")
-#stargazer(portfoliosClaimsVcsnNl1506precipOver50)
-
-
-linearMod5 <- lm(nldif31 ~ nldif10 + claimed + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
+linearMod5 <- lm(nldif31 ~ nldif10 + claimed + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
 summary(linearMod5)
 
-linearMod6 <- lm(nldif31 ~ nldif10 + approved + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
+linearMod6 <- lm(nldif31 ~ nldif10 + approved + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
 summary(linearMod6)
 
-linearMod7 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
+linearMod7 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
 summary(linearMod7)
 
-linearMod8 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + distRiver + distLake + distCoast + medianHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1703precipOver100)  # build linear regression model on full data
-summary(linearMod8)
+#linearMod8 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
+#summary(linearMod8)
+
+stat.desc(portfoliosClaimsVcsnNl1703precipOver100)
 
 stat.desc(portfoliosClaimsVcsnNl1703precipOver50)
-stat.desc(portfoliosClaimsVcsnNl1703precipOver100)
-###
 
-stargazer(linearMod1, linearMod2, linearMod3, linearMod4, title="Results - event three 50mm threshold")
+stargazer(linearMod1, linearMod2, linearMod3, title="Results - event three 50mm threshold")
+#stargazer(portfoliosClaimsVcsnNl1506precipOver50)
 
-stargazer(linearMod5, linearMod6, linearMod7, linearMod8,title = "Results - event three 100mm threshold")
-
-stargazer(linearMod3, linearMod4, linearMod7, linearMod8, title= "Event 3")
-
-
+stargazer(linearMod5, linearMod6, linearMod7, title = "Results - event three 100mm threshold")
+#stargazer(portfoliosClaimsVcsnNl1506precipOver100)
 
