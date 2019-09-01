@@ -192,97 +192,17 @@ portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace_na(portfolio
 #portfoliosClaimsVcsnNl15AllPrecip0620test <- filter(portfoliosClaimsVcsnNl15AllPrecip0620, claimed==1)
 #portfoliosClaimsVcsnNl15$correctLossDate <- ifelse(lossDate == "2015-06-20", 0, 1)
 
-# If we want summary statistics for the full sample of properties 
-#stargazer(portfoliosClaimsVcsnNl15AllPrecip0618)
+# clean desk:
+rm(claims)
+rm(nl201610)
+rm(nl201702)
+rm(nl201506sf)
+rm(portfolios)
+rm(portfoliosClaimsVcsnNl15)
+rm(vcsn)
+rm(vcsn20150618)
+rm(vcsn20150619)
+rm(vcsn20150620)
 
-portfoliosClaimsVcsnNl1506precipOver50 <- filter(portfoliosClaimsVcsnNl15AllPrecip06181920, rain0618 > 50 | rain0619 > 50 | rain0620 > 50 )
-portfoliosClaimsVcsnNl1506precipOver100 <- filter(portfoliosClaimsVcsnNl15AllPrecip06181920, rain0618 > 100 | rain0619 > 100 | rain0620 > 100 )
-
-###
-
-portfoliosClaimsVcsnNl1506precipOver50$medHHIncome <- portfoliosClaimsVcsnNl1506precipOver50$medianHHIncome/1000
-portfoliosClaimsVcsnNl1506precipOver100$medHHIncome <- portfoliosClaimsVcsnNl1506precipOver100$medianHHIncome/1000
-
-portfoliosClaimsVcsnNl1506precipOver50$dRiver <- portfoliosClaimsVcsnNl1506precipOver50$distRiver/1000
-portfoliosClaimsVcsnNl1506precipOver50$dCoast <- portfoliosClaimsVcsnNl1506precipOver50$distCoast/1000
-portfoliosClaimsVcsnNl1506precipOver50$dLake <- portfoliosClaimsVcsnNl1506precipOver50$distLake/1000
-portfoliosClaimsVcsnNl1506precipOver100$dRiver <- portfoliosClaimsVcsnNl1506precipOver100$distRiver/1000
-portfoliosClaimsVcsnNl1506precipOver100$dCoast <- portfoliosClaimsVcsnNl1506precipOver100$distCoast/1000
-portfoliosClaimsVcsnNl1506precipOver100$dLake <- portfoliosClaimsVcsnNl1506precipOver100$distLake/1000
-
-##
-
-linearMod1 <- lm(nldif31 ~ nldif10 + claimed + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
-summary(linearMod1)
-
-linearMod2 <- lm(nldif31 ~ nldif10 + approved + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
-summary(linearMod2)
-
-linearMod3 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
-summary(linearMod3)
-
-#linearMod4 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver50)  # build linear regression model on full data
-#summary(linearMod4)
-
-######
-
-linearMod5 <- lm(nldif31 ~ nldif10 + claimed + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
-summary(linearMod5)
-
-linearMod6 <- lm(nldif31 ~ nldif10 + approved + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
-summary(linearMod6)
-
-linearMod7 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
-summary(linearMod7)
-
-#linearMod8 <- lm(nldif31 ~ nldif10 + closedIn90days + slope + dRiver + dLake + dCoast + medHHIncome + propDwellingNotOwned, data=portfoliosClaimsVcsnNl1506precipOver100)  # build linear regression model on full data
-#summary(linearMod8)
-
-stat.desc(portfoliosClaimsVcsnNl1506precipOver100)
-
-stat.desc(portfoliosClaimsVcsnNl1506precipOver50)
-
-stargazer(linearMod1, linearMod2, linearMod3, title="Results - event one 50mm threshold")
-#stargazer(portfoliosClaimsVcsnNl1506precipOver50)
-
-stargazer(linearMod5, linearMod6, linearMod7, title = "Results - event one 100mm threshold")
-#stargazer(portfoliosClaimsVcsnNl1506precipOver100)
-
-#stargazer(linearMod3, linearMod4, linearMod7, linearMod8, title= "Event 1")
-#stargazer(portfoliosClaimsVcsnNl15AllPrecip06181920, portfoliosClaimsVcsnNl1506precipOver50, portfoliosClaimsVcsnNl1506precipOver100)
-
-
-######
-
-
-# to do: add map images of event data e.g. rain, claimed upon properties 
-portfoliosClaimsVcsnNl1506precipOver50points <- portfoliosClaimsVcsnNl1506precipOver50[,c("portfolioID","claimed","geometry")]
-plot(st.as.sf(portfoliosClaimsVcsnNl1506precipOver50points))
-portfoliosClaimsVcsnNl1506precipOver100points <- portfoliosClaimsVcsnNl1506precipOver100[,c("portfolioID","claimed","geometry")]
-plot(st.as.sf(portfoliosClaimsVcsnNl1506precipOver100points))
-
-#######
-
-
-#Plot precip total:
-ggplot(data=vcsn201506) +
-  geom_point(vcsn201506, 
-             mapping = aes(
-               x = vcsn201506$vcsnDay, 
-               y = vcsn201506$rain)
-  ) +
-  labs(title = "Event One - 2015-06", 
-       y = "precipitation in mm/day",
-       x = "date"
-)
-ggsave("event1plot.png", width = 5, height = 5) 
-
-
-
-a <- ggplot(data = portfoliosClaimsVcsnNl15AllPrecip06181920,
-            mapping = aes(rain0618, claimed))
-
-  labs(title = "Event One - 2015-06", 
-       y = "precipitation in mm/day",
-       x = "date"
-  )
+# save final set: 
+save.image("~/insurance-and-climate/Data/EQC-event1-full-processed.RData")
