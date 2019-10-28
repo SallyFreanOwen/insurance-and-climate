@@ -36,7 +36,7 @@ claims <- filter(claims, lossDate > "2011-01-01")
 
 # Properties:
 portfolios <- portfolios[,c("portfolioID","vcsnLongitude", "vcsnLatitude")]
-names(portfolios)[2:3] <- c("vcsnLongitude", "vcsnLatitude")
+#names(portfolios)[2:3] <- c("vcsnLongitude", "vcsnLatitude")
 
 # Merge the property info to the claims
 claimPortfolio <- merge(portfolios, claims, by = "portfolioID", all.y = TRUE)
@@ -64,10 +64,11 @@ claim16 <- filter(claimPortfolio, claimPortfolio$lossDate > "2015-12-01", claimP
 claim17 <- filter(claimPortfolio, claimPortfolio$lossDate > "2016-12-01", claimPortfolio$lossDate < "2018-01-01")
 claim18 <- filter(claimPortfolio, claimPortfolio$lossDate > "2017-12-01", claimPortfolio$lossDate < "2019-01-01")
 
-# Attach the year's rain information to each claim 
+## Attach the year's rain information to each claim 
 merge12 <- merge(claim12, vcsn12, by = c("vcsnLongitude", "vcsnLatitude"))
 
-#add rainfall to claim info (annual subsets) 
+# add rainfall to claim info (annual subsets) 
+
 #merge11 <- merge(claim11, vcsn11, by = c("vcsnLongitude", "vcsnLatitude"))
 merge12 <- merge(claim12, vcsn12, by = c("vcsnLongitude", "vcsnLatitude"))
 merge13 <- merge(claim13, vcsn13, by = c("vcsnLongitude", "vcsnLatitude"))
