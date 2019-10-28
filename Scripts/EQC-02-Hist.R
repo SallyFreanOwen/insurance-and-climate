@@ -66,11 +66,6 @@ claim18 <- filter(claimPortfolio, claimPortfolio$lossDate > "2017-12-01", claimP
 
 ## Attach the year's rain information to each claim 
 merge12 <- merge(claim12, vcsn12, by = c("vcsnLongitude", "vcsnLatitude"))
-
-# add rainfall to claim info (annual subsets) 
-
-#merge11 <- merge(claim11, vcsn11, by = c("vcsnLongitude", "vcsnLatitude"))
-merge12 <- merge(claim12, vcsn12, by = c("vcsnLongitude", "vcsnLatitude"))
 merge13 <- merge(claim13, vcsn13, by = c("vcsnLongitude", "vcsnLatitude"))
 merge14 <- merge(claim14, vcsn14, by = c("vcsnLongitude", "vcsnLatitude"))
 merge15 <- merge(claim15, vcsn15, by = c("vcsnLongitude", "vcsnLatitude"))
@@ -209,38 +204,50 @@ claimPortfolioVcsnOffset <- rbind(claimPortfolioVcsnOffset, merge18)
 
 # Plots: 
 
-ggplot(data=claimPortfolioVcsnOffset) +
-  geom_point(claimPortfolioVcsnOffset, 
-           mapping = aes(
-             x = offset, 
-             y = rain
-           )
-  )
+p <- ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) 
 
-ggplot(data=claimPortfolioVcsnOffset) +
-  geom_histogram(claimPortfolioVcsnOffset, 
-             mapping = aes(
-               x = rain
-             )
-  )
+#p + geom_boxplot(aes(group=offset))
+#p + geom_boxplot(aes(group=offset)) + coord_flip()
+p + geom_boxplot(aes(group=offset), 
+                 fill = "lightblue", 
+                 colour = "lightblue4", 
+                 outlier.shape = NA) + 
+  xlab("days from properties' Loss Date") + 
+  ylab("daily rainfall at VCSN nearest property") + 
+  theme_minimal() + 
+  coord_cartesian(ylim = c(0, 175), 
+                  expand = TRUE, 
+                  default = FALSE, 
+                  clip = "on")
 
-ggplot(data=claimPortfolioVcsnOffset) +
-  geom_col(claimPortfolioVcsnOffset, 
-           mapping = aes(
-             x = offset, 
-             y = rain
-           )
-  )
 
-ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) +
-  geom_col()
 
-ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) +
-  geom_point()
+#ggplot(data=claimPortfolioVcsnOffset) +
+#  geom_point(claimPortfolioVcsnOffset, 
+#           mapping = aes(
+#             x = offset, 
+#             y = rain
+#           )
+#  )
 
-ggplot(data=claimPortfolioVcsnOffset) +
-geom_boxplot(mapping = aes(offset, 
-                           rain), 
-             stat = "boxplot",
-             position = "dodge2"
-)
+#ggplot(data=claimPortfolioVcsnOffset) +
+#  geom_histogram(claimPortfolioVcsnOffset, 
+#             mapping = aes(
+#               x = rain
+#             )
+#  )
+
+#ggplot(data=claimPortfolioVcsnOffset) +
+#  geom_col(claimPortfolioVcsnOffset, 
+#           mapping = aes(
+#             x = offset, 
+#             y = rain
+#           )
+#  )
+
+#ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) +
+ # geom_col()
+
+#ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) +
+ # geom_point()
+
