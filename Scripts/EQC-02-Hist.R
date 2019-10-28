@@ -13,7 +13,6 @@ library(stars)
 
 rm(nl201505)
 rm(nl201506)
-rm(nl201506sf)
 rm(nl201507)
 rm(nl201508)
 rm(nl201610)
@@ -24,7 +23,9 @@ rm(nl201702)
 rm(nl201703)
 rm(nl201704)
 rm(nl201705)
-# Left with claims, portfolios, vcsn 
+# Left with claims, portfolios, vcsn, vcsnWide, mbStats
+rm(mbStats)
+rm(vcsnWide)
 
 ### Reduce datasets to only information needed for histograms 
 # (claims post 2011, rain post 2011, only dates, locations and keys)
@@ -34,7 +35,7 @@ claims <- claims[,c("claimID", "portfolioID", "lossDate", "eventDate")]
 claims <- filter(claims, lossDate > "2011-01-01")
 
 # Properties:
-portfolios <- portfolios[,c("portfolioID","vcsnLongitude.x", "vcsnLatitude.x")]
+portfolios <- portfolios[,c("portfolioID","vcsnLongitude", "vcsnLatitude")]
 names(portfolios)[2:3] <- c("vcsnLongitude", "vcsnLatitude")
 
 # Merge the property info to the claims
@@ -235,3 +236,10 @@ ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) +
 
 ggplot(claimPortfolioVcsnOffset, aes(offset, rain)) +
   geom_point()
+
+ggplot(data=claimPortfolioVcsnOffset) +
+geom_boxplot(mapping = aes(offset, 
+                           rain), 
+             stat = "boxplot",
+             position = "dodge2"
+)
