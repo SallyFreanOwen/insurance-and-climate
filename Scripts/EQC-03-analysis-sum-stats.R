@@ -25,4 +25,3 @@ stat.desc(portfolios[,sapply(portfolios,is.numeric)], basic=F)
 library(pastecs)
 options(digits=3)
 stat.desc(claimPortfolioVcsnFull[,sapply(claimPortfolioVcsnFull,is.numeric)], basic=F)
-

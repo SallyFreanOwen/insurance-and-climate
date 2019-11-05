@@ -47,17 +47,23 @@ claims201506$closedIn90days <- ifelse((claims201506$buildingTimeToPayment<91|cla
 # generate precip window 
 claims201506 <- mutate(claims201506, claims201506$lossDate+1)
 claims201506 <- mutate(claims201506, claims201506$lossDate+2)
-names(claims201506)[16:17] <- c("lossDatePlusOne", "lossDatePlusTwo")
+claims201506 <- mutate(claims201506, claims201506$lossDate-1)
+claims201506 <- mutate(claims201506, claims201506$lossDate-2)
+names(claims201506)[16:19] <- c("lossDatePlusOne", "lossDatePlusTwo", "lossDateMinusOne", "lossDateMinusTwo")
 
 portfoliosClaims15 <- merge(portfolios, claims201506, by = "portfolioID", all.x = TRUE)
 
 # attach to claimed upon properties:
 portfoliosClaimsVcsn15 <- merge(portfoliosClaims15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDate"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
-names(portfoliosClaimsVcsn15)[32] <- "rain1"
+names(portfoliosClaimsVcsn15)[34] <- "rain1"
 portfoliosClaimsVcsn15 <- merge(portfoliosClaimsVcsn15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDatePlusOne"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
-names(portfoliosClaimsVcsn15)[33] <- "rain2"
+names(portfoliosClaimsVcsn15)[35] <- "rain2"
 portfoliosClaimsVcsn15 <- merge(portfoliosClaimsVcsn15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDatePlusTwo"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
-names(portfoliosClaimsVcsn15)[34] <- "rain3"
+names(portfoliosClaimsVcsn15)[36] <- "rain3"
+portfoliosClaimsVcsn15 <- merge(portfoliosClaimsVcsn15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDateMinusOne"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
+names(portfoliosClaimsVcsn15)[37] <- "rain-1"
+portfoliosClaimsVcsn15 <- merge(portfoliosClaimsVcsn15, vcsn201506[,c("vcsnLongitude","vcsnLatitude","vcsnDay","rain")], by.x = c("vcsnLongitude", "vcsnLatitude", "lossDateMinusTwo"), by.y = c("vcsnLongitude","vcsnLatitude","vcsnDay"), all.x = TRUE)
+names(portfoliosClaimsVcsn15)[38] <- "rain-2"
 
 # NL work... 
 
@@ -75,7 +81,9 @@ portfoliosClaimsVcsn15 <- portfoliosClaimsVcsn15[,c(
   "vcsnLatitude",                
   "lossDatePlusTwo",             
   "lossDatePlusOne",             
-  "lossDate",                    
+  "lossDate",
+  "lossDateMinusOne",
+  "lossDateMinus",
   "portfolioID",                 
   "mLandValueWithin8m",             
   "mDwellingValue",              
@@ -101,7 +109,9 @@ portfoliosClaimsVcsn15 <- portfoliosClaimsVcsn15[,c(
   "closedIn90days",              
   "rain1",                       
   "rain2",                       
-  "rain3" ,                      
+  "rain3" ,
+  "rain-1",
+  "rain-2",
   "geometry" 
 )]
 
@@ -206,3 +216,5 @@ rm(vcsn20150620)
 
 # save final set: 
 save.image("~/insurance-and-climate/Data/EQC-event1-full-processed.RData")
+
+

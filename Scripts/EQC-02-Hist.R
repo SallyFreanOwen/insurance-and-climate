@@ -213,7 +213,7 @@ p + geom_boxplot(aes(group=offset),
                  colour = "lightblue4", 
                  outlier.shape = NA) + 
   xlab("days from properties' Loss Date") + 
-  ylab("daily rainfall at VCSN nearest property") + 
+  ylab("daily rainfall at VCSN nearest") + 
   theme_minimal() + 
   coord_cartesian(ylim = c(0, 175), 
                   expand = TRUE, 
