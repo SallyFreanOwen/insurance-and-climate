@@ -68,9 +68,17 @@ source("Scripts/EQC-02-processing.r")
 # attaches rain grid lat and lon as vars to each portfolio 
 # repeats process above for nightlight data 
 # Inputs: portfolios.rData, vcsn.Rdata, nlYYYYMM set of .rData, 
-# Outputs: portfolios.rData (vcsn and NL latlon ids appended)
+# Outputs: portfolios.rData (vcsn and NL latlon ids appended) 
 
 ######################################
+
+# (short inputs: 
+# load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData))
+
+### 
+source("Scripts/EQC-02-Hist.R")
+
+##########################
 
 ### Processsing and regression analysis per event: 
 source("Scripts/EQC-03a-Event1-Processing-and-reg-analysis.r")

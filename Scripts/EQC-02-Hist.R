@@ -55,6 +55,8 @@ vcsn16 <- filter(vcsn, vcsn$vcsnDay > "2015-12-31", vcsn$vcsnDay < "2017-01-01")
 vcsn17 <- filter(vcsn, vcsn$vcsnDay > "2016-12-31", vcsn$vcsnDay < "2018-01-01")
 vcsn18 <- filter(vcsn, vcsn$vcsnDay > "2017-12-31", vcsn$vcsnDay < "2019-01-01")
 
+#rm(vcsn)
+
 claim11 <- filter(claimPortfolio, claimPortfolio$lossDate > "2010-12-01", claimPortfolio$lossDate < "2012-01-01")
 claim12 <- filter(claimPortfolio, claimPortfolio$lossDate > "2011-12-01", claimPortfolio$lossDate < "2013-01-01")
 claim13 <- filter(claimPortfolio, claimPortfolio$lossDate > "2012-12-01", claimPortfolio$lossDate < "2014-01-01")
@@ -72,6 +74,22 @@ merge15 <- merge(claim15, vcsn15, by = c("vcsnLongitude", "vcsnLatitude"))
 merge16 <- merge(claim16, vcsn16, by = c("vcsnLongitude", "vcsnLatitude"))
 merge17 <- merge(claim17, vcsn17, by = c("vcsnLongitude", "vcsnLatitude"))
 merge18 <- merge(claim18, vcsn18, by = c("vcsnLongitude", "vcsnLatitude"))
+
+rm(claim12)
+rm(claim13)
+rm(claim14)
+rm(claim15)
+rm(claim16)
+rm(claim17)
+rm(claim18)
+
+rm(vcsn12)
+rm(vcsn13)
+rm(vcsn14)
+rm(vcsn15)
+rm(vcsn16)
+rm(vcsn17)
+rm(vcsn18)
 
 ### Add rainfall to claim info 
 claimPortfolioSpatialVCS <- merge12
@@ -212,15 +230,13 @@ p + geom_boxplot(aes(group=offset),
                  fill = "lightblue", 
                  colour = "lightblue4", 
                  outlier.shape = NA) + 
-  xlab("days from properties' Loss Date") + 
-  ylab("daily rainfall at VCSN nearest") + 
+  xlab("days from Loss Date") + 
+  ylab("daily rainfall estimate (mm)") + 
   theme_minimal() + 
   coord_cartesian(ylim = c(0, 175), 
                   expand = TRUE, 
                   default = FALSE, 
                   clip = "on")
-
-
 
 #ggplot(data=claimPortfolioVcsnOffset) +
 #  geom_point(claimPortfolioVcsnOffset, 
