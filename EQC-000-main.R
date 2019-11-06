@@ -59,6 +59,8 @@ source("Scripts/EQC-01-imports-meshblock-data.r")
 #source("Scripts/EQC-00-parsing-HW-catalog.r")
 source("Scripts/EQC-01-imports-HW-catalog.r")
 
+#save.image("~/insurance-and-climate/Data/data-insurance-and-climate.RData")
+
 ######################################
 
 ### Linking and geo-processing: 
@@ -68,15 +70,25 @@ source("Scripts/EQC-02-processing.r")
 # attaches rain grid lat and lon as vars to each portfolio 
 # repeats process above for nightlight data 
 # Inputs: portfolios.rData, vcsn.Rdata, nlYYYYMM set of .rData, 
-# Outputs: portfolios.rData (vcsn and NL latlon ids appended) 
+# Outputs: as before, but with portfolios.rData (vcsn and NL latlon ids appended) 
+
+#load("~/insurance-and-climate/Data/data-insurance-and-climate.RData"))
+
+#save.image("~/insurance-and-climate/data-insurance-and-climate-post-processed.RData"))
 
 ######################################
 
-# (short inputs: 
-# load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData))
+# Alternate short inputs: 
+# load("~/insurance-and-climate/Data/data-insurance-and-climate.RData"))
 
-### 
-source("Scripts/EQC-02-Hist.R")
+### Box plots 
+source("Scripts/EQC-02-graphic.R")
+#Inputs: data-insurance-and-climate.RData)
+# NB save plot  at this stage 
+# Output: Figures/"Rplot - rain boxplots by loss date offset.png"
+
+# load("~/insurance-and-climate/Data/data-insurance-and-climate.RData))
+# load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData))
 
 ##########################
 
