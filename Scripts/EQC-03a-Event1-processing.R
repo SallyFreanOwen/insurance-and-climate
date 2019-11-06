@@ -1,13 +1,21 @@
+library(dplyr)
 library(pastecs)
 library(stargazer)
+library(stars)
+library(tidyr)
+library(devtools)
 options(digits=3)
 
-# Tidy workspace (only require event data)
+### Input: load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData")
 
+# Tidy workspace (only require event one data)
+
+rm(nl201610)
 rm(nl201611)
 rm(nl201612)
 rm(nl201701)
 
+rm(nl201702)
 rm(nl201703)
 rm(nl201704)
 rm(nl201705)
@@ -38,6 +46,11 @@ claims201506 <- claims201506[,c("claimID","portfolioID",
                                 "buildingClaimCloseDate", "landClaimCloseDate",
                                 "eventMonth","eventYear",
                                 "approved")]
+
+# keep only claims (within the month) from the event in question: 
+claims201506 <- dplyr::filter(claims201506, 
+                              lossDate > "2015-06-16" &
+                                lossDate < "2015-06-23")
 
 # generate time to payment:
 claims201506$buildingTimeToPayment <- claims201506$buildingClaimCloseDate - claims201506$lossDate
@@ -83,7 +96,7 @@ portfoliosClaimsVcsn15 <- portfoliosClaimsVcsn15[,c(
   "lossDatePlusOne",             
   "lossDate",
   "lossDateMinusOne",
-  "lossDateMinus",
+  "lossDateMinusTwo",
   "portfolioID",                 
   "mLandValueWithin8m",             
   "mDwellingValue",              
@@ -111,8 +124,7 @@ portfoliosClaimsVcsn15 <- portfoliosClaimsVcsn15[,c(
   "rain2",                       
   "rain3" ,
   "rain-1",
-  "rain-2",
-  "geometry" 
+  "rain-2"
 )]
 
 rm(claims201506)
@@ -121,14 +133,14 @@ rm(portfoliosClaims15)
 
 # attach NL information to all properties 
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsn15, nl201505df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[32] <- "nl0"
+names(portfoliosClaimsVcsnNl15)[36] <- "nl0"
 
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsnNl15, nl201506df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[33] <- "nl1"
+names(portfoliosClaimsVcsnNl15)[37] <- "nl1"
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsnNl15, nl201507df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[34] <- "nl2"
+names(portfoliosClaimsVcsnNl15)[38] <- "nl2"
 portfoliosClaimsVcsnNl15 <- merge(portfoliosClaimsVcsnNl15, nl201508df, by.x = c("nlLongitude","nlLatitude"), by.y = c("x","y"), all.x = TRUE)
-names(portfoliosClaimsVcsnNl15)[35] <- "nl3"
+names(portfoliosClaimsVcsnNl15)[39] <- "nl3"
 
 # check it is what you think it is...
 names(portfoliosClaimsVcsnNl15)
@@ -149,10 +161,10 @@ rm(nl201508df)
 
 ### Build correct NL variables for analysis:
 portfoliosClaimsVcsnNl15 <- mutate(portfoliosClaimsVcsnNl15, nl3-nl1)
-names(portfoliosClaimsVcsnNl15)[37] <- c("nldif31")
+names(portfoliosClaimsVcsnNl15)[41] <- c("nldif31")
 
 portfoliosClaimsVcsnNl15 <- mutate(portfoliosClaimsVcsnNl15, nl1-nl0)
-names(portfoliosClaimsVcsnNl15)[38] <- c("nldif10")
+names(portfoliosClaimsVcsnNl15)[42] <- c("nldif10")
 
 #library(pastecs)
 #options(digits=3)
@@ -166,35 +178,64 @@ names(portfoliosClaimsVcsnNl15)[38] <- c("nldif10")
 #plot(x = claims201506$lossDate, y= claims201506$landPaid)
 
 #Looks like we want LossDate/vcsnDay= 18th June or the next few days 
+vcsn15 <- filter(vcsn, vcsn$vcsnDay > "2014-12-31", vcsn$vcsnDay < "2016-01-01")
+vcsn1506 <- filter(vcsn15, vcsn15$eventMonth == "6")
+rm(vcsn15)
 
-vcsn20150618 <- filter(vcsn, vcsnDay=="2015-06-18")
+vcsn20150617 <- filter(vcsn1506, vcsnDay=="2015-06-17")
+vcsn20150617 <- vcsn20150617[,c("vcsnLongitude", "vcsnLatitude", "rain")]
+#plot(vcsn20150618)
+vcsn20150618 <- filter(vcsn1506, vcsnDay=="2015-06-18")
 vcsn20150618 <- vcsn20150618[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 #plot(vcsn20150618)
-vcsn20150619 <- filter(vcsn, vcsnDay=="2015-06-19")
+vcsn20150619 <- filter(vcsn1506, vcsnDay=="2015-06-19")
 vcsn20150619 <- vcsn20150619[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 #plot(vcsn20150619)
-vcsn20150620 <- filter(vcsn, vcsnDay=="2015-06-20")
+vcsn20150620 <- filter(vcsn1506, vcsnDay=="2015-06-20")
 vcsn20150620 <- vcsn20150620[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 #plot(vcsn20150620)
+vcsn20150621 <- filter(vcsn1506, vcsnDay=="2015-06-21")
+vcsn20150621 <- vcsn20150621[,c("vcsnLongitude", "vcsnLatitude", "rain")]
+#plot(vcsn20150621)
+vcsn20150622 <- filter(vcsn1506, vcsnDay=="2015-06-22")
+vcsn20150622 <- vcsn20150622[,c("vcsnLongitude", "vcsnLatitude", "rain")]
+
+#plot(vcsn20150622)
 #vcsn20150621 <- filter(vcsn, vcsnDay=="2015-06-21")
 #vcsn20150621 <- vcsn20150621[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 #vcsn20150622 <- filter(vcsn, vcsnDay=="2015-06-22")
 #vcsn20150622 <- vcsn20150622[,c("vcsnLongitude", "vcsnLatitude", "rain")]
 
-portfoliosClaimsVcsnNl15AllPrecip0618 <- merge(portfoliosClaimsVcsnNl15, vcsn20150618, by = c("vcsnLongitude", "vcsnLatitude"))
-names(portfoliosClaimsVcsnNl15AllPrecip0618)[39] <- c("rain0618")
-portfoliosClaimsVcsnNl15AllPrecip061819 <- merge(portfoliosClaimsVcsnNl15AllPrecip0618, vcsn20150619, by = c("vcsnLongitude", "vcsnLatitude"))
-names(portfoliosClaimsVcsnNl15AllPrecip061819)[40] <- c("rain0619")
-portfoliosClaimsVcsnNl15AllPrecip06181920 <- merge(portfoliosClaimsVcsnNl15AllPrecip061819, vcsn20150620, by = c("vcsnLongitude", "vcsnLatitude"))
-names(portfoliosClaimsVcsnNl15AllPrecip06181920)[41] <- c("rain0620")
+portfoliosClaimsVcsnNl15AllPrecip0617 <- merge(portfoliosClaimsVcsnNl15, vcsn20150617, by = c("vcsnLongitude", "vcsnLatitude"))
+names(portfoliosClaimsVcsnNl15AllPrecip0617)[43] <- c("rain0617")
+portfoliosClaimsVcsnNl15AllPrecip061718 <- merge(portfoliosClaimsVcsnNl15AllPrecip0617, vcsn20150618, by = c("vcsnLongitude", "vcsnLatitude"))
+names(portfoliosClaimsVcsnNl15AllPrecip061718)[44] <- c("rain0618")
+portfoliosClaimsVcsnNl15AllPrecip06171819 <- merge(portfoliosClaimsVcsnNl15AllPrecip061718, vcsn20150619, by = c("vcsnLongitude", "vcsnLatitude"))
+names(portfoliosClaimsVcsnNl15AllPrecip06171819)[45] <- c("rain0619")
+portfoliosClaimsVcsnNl15AllPrecip0617181920 <- merge(portfoliosClaimsVcsnNl15AllPrecip06171819, vcsn20150620, by = c("vcsnLongitude", "vcsnLatitude"))
+names(portfoliosClaimsVcsnNl15AllPrecip0617181920)[46] <- c("rain0620")
+portfoliosClaimsVcsnNl15AllPrecip061718192021 <- merge(portfoliosClaimsVcsnNl15AllPrecip0617181920, vcsn20150621, by = c("vcsnLongitude", "vcsnLatitude"))
+names(portfoliosClaimsVcsnNl15AllPrecip061718192021)[47] <- c("rain0621")
+portfoliosClaimsVcsnNl15AllPrecip06171819202122 <- merge(portfoliosClaimsVcsnNl15AllPrecip061718192021, vcsn20150622, by = c("vcsnLongitude", "vcsnLatitude"))
+names(portfoliosClaimsVcsnNl15AllPrecip06171819202122)[48] <- c("rain0622")
 
-rm(portfoliosClaimsVcsnNl15AllPrecip0618)
-rm(portfoliosClaimsVcsnNl15AllPrecip061819)
+rm(portfoliosClaimsVcsnNl15AllPrecip0617)
+rm(portfoliosClaimsVcsnNl15AllPrecip061718)
+rm(portfoliosClaimsVcsnNl15AllPrecip06171819)
+rm(portfoliosClaimsVcsnNl15AllPrecip0617181920)
+rm(portfoliosClaimsVcsnNl15AllPrecip061718192021)
+
+rm(vcsn20150617)
+rm(vcsn20150618)
+rm(vcsn20150619)
+rm(vcsn20150620)
+rm(vcsn20150621)
+rm(vcsn20150622)
 
 # adjust "approved" variable to also be 0 for unclaimed properties:
 # first - has it got a claim at all? 
-portfoliosClaimsVcsnNl15AllPrecip06181920$approved <- replace_na(portfoliosClaimsVcsnNl15AllPrecip06181920$approved, 0)
-portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace_na(portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days, 0)
+portfoliosClaimsVcsnNl15AllPrecip06171819202122$approved <- replace_na(portfoliosClaimsVcsnNl15AllPrecip06171819202122$approved, 0)
+portfoliosClaimsVcsnNl15AllPrecip06171819202122$closedIn90days <- replace_na(portfoliosClaimsVcsnNl15AllPrecip06171819202122$closedIn90days, 0)
 #portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace(portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days,portfoliosClaimsVcsnNl15AllPrecip06181920$approved==0, 0)
 
 # check it is what you think it is...
@@ -202,19 +243,16 @@ portfoliosClaimsVcsnNl15AllPrecip06181920$closedIn90days <- replace_na(portfolio
 #portfoliosClaimsVcsnNl15AllPrecip0620test <- filter(portfoliosClaimsVcsnNl15AllPrecip0620, claimed==1)
 #portfoliosClaimsVcsnNl15$correctLossDate <- ifelse(lossDate == "2015-06-20", 0, 1)
 
+#portfoliosClaimsVcsnNl15AllPrecip06171819202122 <- as.data.frame(portfoliosClaimsVcsnNl15AllPrecip06171819202122)
+
 # clean desk:
 rm(claims)
-rm(nl201610)
-rm(nl201702)
 rm(nl201506sf)
 rm(portfolios)
 rm(portfoliosClaimsVcsnNl15)
 rm(vcsn)
-rm(vcsn20150618)
-rm(vcsn20150619)
-rm(vcsn20150620)
+rm(vcsn1506)
+rm(nzboundary)
 
 # save final set: 
-save.image("~/insurance-and-climate/Data/EQC-event1-full-processed.RData")
-
-
+save.image("~/insurance-and-climate/Data/EQC-event1-full.RData")
