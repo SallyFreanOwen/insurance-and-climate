@@ -63,6 +63,22 @@ source("Scripts/EQC-01-imports-HW-catalog.r")
 
 ######################################
 
+# Alternate short inputs: 
+# load("~/insurance-and-climate/Data/data-insurance-and-climate.RData"))
+
+### Box plot graphic...
+source("Scripts/EQC-02-Graphic.R")
+#Inputs: data-insurance-and-climate.RData)
+# NB save plot  at this stage 
+# Output: Figures/"Rplot - rain boxplots by loss date offset.png"
+
+# Then clear decks and revert to: 
+# load("~/insurance-and-climate/Data/data-insurance-and-climate.RData))
+
+##########################
+
+#load("~/insurance-and-climate/Data/data-insurance-and-climate.RData"))
+
 ### Linking and geo-processing: 
 source("Scripts/EQC-02-processing.r")
 # makes portfolios spatial 
@@ -72,27 +88,24 @@ source("Scripts/EQC-02-processing.r")
 # Inputs: portfolios.rData, vcsn.Rdata, nlYYYYMM set of .rData, 
 # Outputs: as before, but with portfolios.rData (vcsn and NL latlon ids appended) 
 
-#load("~/insurance-and-climate/Data/data-insurance-and-climate.RData"))
-
 #save.image("~/insurance-and-climate/data-insurance-and-climate-post-processed.RData"))
 
 ######################################
 
-# Alternate short inputs: 
-# load("~/insurance-and-climate/Data/data-insurance-and-climate.RData"))
-
-### Box plots 
-source("Scripts/EQC-02-graphic.R")
-#Inputs: data-insurance-and-climate.RData)
-# NB save plot  at this stage 
-# Output: Figures/"Rplot - rain boxplots by loss date offset.png"
-
-# load("~/insurance-and-climate/Data/data-insurance-and-climate.RData))
 # load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData))
 
-##########################
-
 ### Processsing and regression analysis per event: 
-source("Scripts/EQC-03a-Event1-Processing-and-reg-analysis.r")
-source("Scripts/EQC-03b-Event2-processing-and-reg.r")
-source("Scripts/EQC-03a-Event3-processing-and-reg.r")
+source("Scripts/EQC-03a-Event1-processing.r")
+#Output: /Data/EQC-event1-full-processed.RData
+source("Scripts/EQC-03b-Event2-processing.r")
+#Output: /Data/EQC-event2-full-processed.RData
+source("Scripts/EQC-03c-Event3-processing.r")
+#Output: /Data/EQC-event3-full-processed.RData
+
+#######################################
+
+#Mapping and regression analysis 
+
+source("Scripts/EQC-04-Maps.r")
+source("Scripts/EQC-04-regs.r")
+
