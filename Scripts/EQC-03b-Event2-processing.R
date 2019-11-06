@@ -128,7 +128,6 @@ portfoliosClaimsVcsn16 <- portfoliosClaimsVcsn16[,c(
   "rain-2"
 )]
 
-
 rm(claims201611)
 rm(vcsn201611)
 rm(portfoliosClaims16)

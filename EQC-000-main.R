@@ -88,11 +88,11 @@ source("Scripts/EQC-02-processing.r")
 # Inputs: portfolios.rData, vcsn.Rdata, nlYYYYMM set of .rData, 
 # Outputs: as before, but with portfolios.rData (vcsn and NL latlon ids appended) 
 
-#save.image("~/insurance-and-climate/data-insurance-and-climate-post-processed.RData"))
+#save.image("~/insurance-and-climate/data-insurance-and-climate-post-processed.RData")
 
 ######################################
 
-# load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData))
+# load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData")
 
 ### Processsing and regression analysis per event: 
 source("Scripts/EQC-03a-Event1-processing.r")

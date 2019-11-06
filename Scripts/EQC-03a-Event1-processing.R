@@ -247,6 +247,8 @@ portfoliosClaimsVcsnNl15AllPrecip06171819202122$closedIn90days <- replace_na(por
 
 # clean desk:
 rm(claims)
+rm(nl201610)
+rm(nl201702)
 rm(nl201506sf)
 rm(portfolios)
 rm(portfoliosClaimsVcsnNl15)
