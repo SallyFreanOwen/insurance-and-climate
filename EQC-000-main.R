@@ -106,6 +106,9 @@ source("Scripts/EQC-03c-Event3-processing.r")
 
 #Mapping and regression analysis 
 
-source("Scripts/EQC-04-Maps.r")
 source("Scripts/EQC-04-regs.r")
+# Outputs: regression and summary tables as LaTeX tables
+
+source("Scripts/EQC-04-Maps.r")
+# Outputs: Six final maps 
 

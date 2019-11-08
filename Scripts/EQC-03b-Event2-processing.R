@@ -1,3 +1,5 @@
+load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData")
+
 library(dplyr)
 library(pastecs)
 library(stargazer)
@@ -45,6 +47,9 @@ claims201611 <- claims201611[,c("claimID","portfolioID",
                                 "buildingClaimCloseDate", "landClaimCloseDate",
                                 "eventMonth","eventYear",
                                 "approved")]
+# eyeball data:
+plot(claims201611$lossDate, claims201611$buildingPaid)
+plot(vcsn201611$vcsnDay,vcsn201611$rain)
 
 # keep only claims (within the month) from the event in question: 
 claims201611 <- dplyr::filter(claims201611, 
@@ -129,7 +134,7 @@ portfoliosClaimsVcsn16 <- portfoliosClaimsVcsn16[,c(
 )]
 
 rm(claims201611)
-rm(vcsn201611)
+#rm(vcsn201611)
 rm(portfoliosClaims16)
 
 # attach NL information to all properties 
@@ -208,9 +213,13 @@ rm(portfoliosClaimsVcsnNl16AllPrecip1113)
 rm(portfoliosClaimsVcsnNl16AllPrecip111314)
 rm(portfoliosClaimsVcsnNl16AllPrecip11131415)
 rm(portfoliosClaimsVcsnNl16AllPrecip1113141516)
+rm(vcsn20161114)
+rm(vcsn20161115)
+rm(vcsn20161116)
 rm(vcsn20161113)
 rm(vcsn20161117)
 rm(vcsn1611)
+rm(nl201610df)
 
 # adjust "approved" variable to also be 0 for unclaimed properties:
 # first - has it got a claim at all? 
@@ -219,13 +228,11 @@ portfoliosClaimsVcsnNl16AllPrecip111314151617$closedIn90days <- replace_na(portf
 
 # clean desk:
 rm(claims)
-rm(nl201610)
-rm(nl201610df)
+rm(nl201507)
+#rm(nl201610)
+#rm(nl201610df)
 rm(portfolios)
 rm(portfoliosClaimsVcsnNl16)
-rm(vcsn20161114)
-rm(vcsn20161115)
-rm(vcsn20161116)
 rm(nzboundary)
 
 # save final set: 
