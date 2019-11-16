@@ -385,6 +385,10 @@ stargazer(eventThreeFull50, summary.stat = c("mean", "sd", "n"))
 stargazer(eventThreeFull50Claimed, summary.stat = c("mean", "sd","n"))
 stargazer(eventThreeFull50nClaimed, summary.stat = c("mean", "sd","n"))
 
+nrow(eventThreeFull50[eventThreeFull50$rain50Claimed == 1,])
+nrow(eventThreeFull50[eventThreeFull50$rain50NotClaimed == 1,])
+
+
 #stargazer(eventTwoFull, subset = eventTwoFull$rain50Claimed==1)
 #stargazer(eventTwoFull, subset = eventTwoFull$rain50nClaimed==1)
 #stargazer(eventThreeFull, subset = eventThreeFull$rain50Claimed==1)

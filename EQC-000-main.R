@@ -92,7 +92,7 @@ source("Scripts/EQC-02-processing.r")
 
 ######################################
 
-# load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData")
+#load("~/insurance-and-climate/Data/data-insurance-and-climate-post-processed.RData")
 
 ### Processsing and regression analysis per event: 
 source("Scripts/EQC-03a-Event1-processing.r")
